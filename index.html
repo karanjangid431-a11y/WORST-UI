@@ -1,0 +1,2314 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>⚡ ENTERPRISE SECURE LOGIN v-0.0.13b (SUPER LEGIT) ⚡</title>
+
+  <!-- 5 Clashing Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Comic+Neue:ital,wght@1,700&family=Creepster&family=Henny+Penny&family=Rubik+Glitch&family=Pacifico&display=swap"
+    rel="stylesheet">
+
+  <style>
+    /* 5 Clashing Fonts Definition */
+    .font-creepster {
+      font-family: 'Creepster', cursive, fantasy;
+    }
+
+    .font-comic {
+      font-family: 'Comic Neue', 'Comic Sans MS', cursive;
+    }
+
+    .font-henny {
+      font-family: 'Henny Penny', cursive;
+    }
+
+    .font-glitch {
+      font-family: 'Rubik Glitch', monospace;
+    }
+
+    .font-pacifico {
+      font-family: 'Pacifico', cursive;
+    }
+
+    .font-papyrus {
+      font-family: 'Papyrus', 'Copperplate', fantasy;
+    }
+
+    :root {
+      --neon-green: #00ff00;
+      --neon-magenta: #ff00ea;
+      --neon-yellow: #ffff00;
+      --neon-cyan: #00ffff;
+      --neon-orange: #ff5500;
+      --neon-hotpink: #ff1493;
+    }
+
+    * {
+      box-sizing: border-box;
+      cursor: crosshair;
+      /* unhelpful cursor */
+    }
+
+    body {
+      margin: 0;
+      padding: 10px;
+      min-height: 100vh;
+      background: repeating-linear-gradient(45deg,
+          #00ff00,
+          #00ff00 20px,
+          #ff00ff 20px,
+          #ff00ff 40px,
+          #ffff00 40px,
+          #ffff00 60px,
+          #00ffff 60px,
+          #00ffff 80px);
+      background-size: 200% 200%;
+      animation: seizureshift 8s ease infinite alternate;
+      color: #00ffff;
+      overflow-x: hidden;
+      user-select: none;
+      position: relative;
+    }
+
+    @keyframes seizureshift {
+      0% {
+        background-position: 0% 0%;
+      }
+
+      50% {
+        background-position: 100% 100%;
+      }
+
+      100% {
+        background-position: 0% 100%;
+      }
+    }
+
+    /* Annoying Animations */
+    .troll-wobble {
+      animation: wobbleAnim 0.7s infinite alternate ease-in-out !important;
+    }
+
+    @keyframes wobbleAnim {
+      0% {
+        transform: rotate(-3deg) scale(0.98);
+      }
+
+      100% {
+        transform: rotate(3deg) scale(1.02);
+      }
+    }
+
+    .troll-spin {
+      animation: spinAnim 12s infinite linear !important;
+    }
+
+    @keyframes spinAnim {
+      from {
+        transform: rotate(0deg);
+      }
+
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    .troll-breathe {
+      animation: breatheAnim 3s infinite alternate ease-in-out !important;
+    }
+
+    @keyframes breatheAnim {
+      0% {
+        font-size: 0.95em;
+        letter-spacing: -0.5px;
+      }
+
+      100% {
+        font-size: 1.15em;
+        letter-spacing: 2px;
+      }
+    }
+
+    /* Lagging Custom Cursor */
+    #trollCursor {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 32px;
+      height: 32px;
+      pointer-events: none;
+      z-index: 9999999;
+      font-size: 28px;
+      line-height: 1;
+      transform: translate(-50%, -50%);
+      transition: transform 0.04s ease;
+      filter: drop-shadow(2px 2px 2px #000);
+    }
+
+    /* Slippery buttons */
+    .slippery-btn {
+      transition: transform 0.12s ease-out;
+    }
+
+    /* Live Gaslighting Viewers Banner */
+    .viewer-gaslight-bar {
+      background: #000000;
+      color: #00ff00;
+      border: 3px solid #ff00ff;
+      padding: 6px 12px;
+      text-align: center;
+      font-size: 1.1rem;
+      font-family: 'Rubik Glitch', monospace;
+      margin-bottom: 8px;
+      box-shadow: 0 0 10px #00ff00;
+    }
+
+    /* Marquee Banner */
+    .annoying-marquee {
+      background: #ffff00;
+      color: #ff00ff;
+      border: 4px dashed #00ff00;
+      padding: 6px;
+      font-size: 1.2rem;
+      text-shadow: 2px 2px #000;
+      font-family: 'Rubik Glitch', monospace;
+      margin-bottom: 12px;
+    }
+
+    /* Main Window Container */
+    .window-frame {
+      max-width: 860px;
+      margin: 20px auto;
+      background: #ff007f;
+      border: 8px ridge #00ffff;
+      box-shadow: 15px 15px 0px #00ff00, -15px -15px 0px #ffff00;
+      padding: 0;
+      position: relative;
+      transition: all 0.2s ease;
+    }
+
+    /* Window Title Bar */
+    .title-bar {
+      background: linear-gradient(90deg, #ff0000, #ff00ff, #0000ff);
+      padding: 6px 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 5px solid #ffff00;
+    }
+
+    .title-text {
+      font-size: 1.5rem;
+      letter-spacing: 2px;
+      color: #00ff00;
+      text-shadow: 2px 2px #ff00ff, -2px -2px #ffff00;
+    }
+
+    /* Fake Close [X] Button */
+    .close-btn {
+      background: #ff0000;
+      color: #ffffff;
+      font-weight: 900;
+      font-size: 1.4rem;
+      border: 4px outset #ffffff;
+      padding: 2px 14px;
+      cursor: pointer;
+      line-height: 1;
+      text-shadow: 1px 1px #000;
+      animation: pulse 1s infinite alternate;
+    }
+
+    .close-btn:hover {
+      background: #ff5500;
+      transform: scale(1.1);
+    }
+
+    @keyframes pulse {
+      0% {
+        transform: rotate(-3deg);
+      }
+
+      100% {
+        transform: rotate(3deg);
+      }
+    }
+
+    /* Window Body */
+    .window-content {
+      padding: 24px;
+      background: #110022;
+      border: 4px solid #00ff00;
+    }
+
+    h1 {
+      font-size: 2.8rem;
+      text-align: center;
+      margin: 8px 0;
+      color: #ffff00;
+      text-shadow: 4px 4px #ff00ff, -3px -3px #00ffff;
+      letter-spacing: 3px;
+    }
+
+    .sub-banner {
+      background: #00ffff;
+      color: #ff0055;
+      padding: 6px;
+      text-align: center;
+      font-size: 1.1rem;
+      font-weight: bold;
+      border: 3px dotted #ff00ff;
+      margin-bottom: 20px;
+    }
+
+    /* Form Layout */
+    .form-group {
+      margin-bottom: 22px;
+      padding: 14px;
+      background: rgba(0, 255, 255, 0.15);
+      border: 3px dashed #ff00ff;
+      position: relative;
+      transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 1.3rem;
+      color: #00ff00;
+      text-shadow: 2px 2px #ff00ff;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    textarea {
+      width: 100%;
+      padding: 12px;
+      font-size: 1.1rem;
+      background: #ffff00;
+      color: #ff0000;
+      border: 4px inset #00ffff;
+      font-weight: bold;
+      outline: none;
+    }
+
+    /* Password Haiku Area */
+    .haiku-box {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .haiku-line-wrap {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .haiku-input {
+      flex: 1;
+      background: #00ff00 !important;
+      color: #110033 !important;
+      border: 3px solid #ff00ff !important;
+    }
+
+    .syllable-pill {
+      min-width: 170px;
+      padding: 6px 10px;
+      font-size: 0.95rem;
+      background: #ff0055;
+      color: #ffff00;
+      border: 2px solid #ffffff;
+      text-align: center;
+      font-weight: bold;
+      font-family: 'Comic Neue', cursive;
+    }
+
+    .syllable-pill.valid {
+      background: #00ffaa;
+      color: #000;
+      border-color: #00ff00;
+    }
+
+    .haiku-rules {
+      font-size: 0.85rem;
+      color: #ff99ff;
+      margin-top: 4px;
+      background: #330033;
+      padding: 6px;
+      border-left: 4px solid #ffff00;
+    }
+
+    /* Password Torture Rule Board */
+    .password-torture-box {
+      margin-top: 10px;
+      background: #000;
+      border: 3px solid #ffff00;
+      padding: 10px;
+    }
+
+    .rule-item {
+      font-size: 0.95rem;
+      padding: 4px 6px;
+      margin-bottom: 4px;
+      font-family: 'Comic Neue', cursive;
+      background: #220033;
+      border: 1px solid #ff00ea;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .rule-item.valid {
+      background: #003311;
+      border-color: #00ff00;
+      color: #00ffaa;
+    }
+
+    .rule-item.invalid {
+      background: #330011;
+      border-color: #ff0055;
+      color: #ff9999;
+    }
+
+    /* Age Slider Nightmare */
+    .slider-wrap {
+      background: #ffff00;
+      padding: 14px;
+      border: 4px ridge #ff0000;
+      color: #0000ff;
+    }
+
+    .slider-display {
+      font-size: 1.3rem;
+      font-weight: 900;
+      color: #ff0000;
+      margin-bottom: 8px;
+      font-family: 'Rubik Glitch', monospace;
+      letter-spacing: 1px;
+    }
+
+    input[type="range"] {
+      width: 100%;
+      height: 25px;
+      accent-color: #ff00ea;
+      cursor: grabbing;
+    }
+
+    .slider-controls {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 8px;
+    }
+
+    .micro-btn {
+      background: #ff00ff;
+      color: #ffff00;
+      border: 2px outset #00ffff;
+      padding: 4px 8px;
+      font-size: 0.8rem;
+      cursor: pointer;
+    }
+
+    /* CAPTCHA FROM HELL */
+    .captcha-card {
+      background: #110033;
+      border: 4px dashed #00ffff;
+      padding: 14px;
+      margin-top: 15px;
+    }
+
+    .robot-check-arena {
+      position: relative;
+      height: 75px;
+      border: 2px solid #ff00ea;
+      background: #ffffff;
+      padding: 12px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+      overflow: hidden;
+    }
+
+    .robot-box-dodge {
+      position: absolute;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 14px;
+      background: #f5f5f5;
+      border: 2px solid #ccc;
+      box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+      cursor: pointer;
+      transition: left 0.15s ease, top 0.15s ease;
+    }
+
+    .robot-box-dodge.shaking {
+      animation: robotShake 0.12s infinite alternate;
+      border-color: #ff0000 !important;
+      background: #ffcccc !important;
+    }
+
+    @keyframes robotShake {
+      0% {
+        transform: translate(-3px, 2px) rotate(-2deg);
+      }
+
+      100% {
+        transform: translate(3px, -2px) rotate(2deg);
+      }
+    }
+
+    .vibes-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      max-width: 320px;
+      margin: 10px auto;
+    }
+
+    .vibes-tile {
+      height: 80px;
+      border: 3px solid #ff00ff;
+      background: #222;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      cursor: pointer;
+      user-select: none;
+      transition: all 0.1s ease;
+    }
+
+    .vibes-tile.selected {
+      border: 5px solid #00ff00;
+      background: #004422;
+      transform: scale(0.95);
+    }
+
+    /* Backward Progress Bar */
+    .progress-section {
+      margin: 25px 0;
+      padding: 14px;
+      background: #002244;
+      border: 3px double #00ffff;
+    }
+
+    .progress-title {
+      font-size: 1.1rem;
+      color: #00ffff;
+      margin-bottom: 6px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .progress-outer {
+      width: 100%;
+      height: 36px;
+      background: #000000;
+      border: 4px ridge #ff00ff;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .progress-inner {
+      height: 100%;
+      width: 87%;
+      background: repeating-linear-gradient(-45deg,
+          #ff0000,
+          #ff0000 10px,
+          #ffff00 10px,
+          #ffff00 20px);
+      transition: width 0.4s ease;
+      box-shadow: 0 0 15px #ff0000;
+    }
+
+    .progress-status {
+      font-size: 0.9rem;
+      color: #ffff00;
+      margin-top: 6px;
+      font-family: 'Courier New', monospace;
+    }
+
+    /* Runaway Submit Button Container */
+    .submit-arena {
+      position: relative;
+      height: 140px;
+      margin-top: 25px;
+      border: 4px dotted #00ff00;
+      background: rgba(255, 0, 255, 0.2);
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #runawayBtn {
+      position: absolute;
+      background: linear-gradient(45deg, #00ff00, #ffff00);
+      color: #ff0000;
+      font-size: 1.4rem;
+      font-weight: 900;
+      padding: 15px 30px;
+      border: 5px outset #00ffff;
+      box-shadow: 6px 6px 0px #ff00ff;
+      cursor: pointer;
+      transition: left 0.12s ease-out, top 0.12s ease-out;
+      white-space: nowrap;
+      z-index: 100;
+    }
+
+    /* Saved Toast Alert (Lying) */
+    .toast-container {
+      position: fixed;
+      top: 15px;
+      right: 15px;
+      z-index: 99999;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      pointer-events: none;
+    }
+
+    .lying-toast {
+      background: #00ff00;
+      color: #000;
+      border: 4px solid #ff0000;
+      box-shadow: 8px 8px 0px #000;
+      padding: 14px 20px;
+      font-family: 'Comic Neue', cursive;
+      font-size: 1.1rem;
+      font-weight: bold;
+      animation: popin 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+      max-width: 360px;
+    }
+
+    @keyframes popin {
+      from {
+        transform: scale(0.2) rotate(15deg);
+        opacity: 0;
+      }
+
+      to {
+        transform: scale(1) rotate(0deg);
+        opacity: 1;
+      }
+    }
+
+    /* Passive Aggressive Insults Floating Container */
+    #passiveAggressiveContainer {
+      position: fixed;
+      pointer-events: none;
+      z-index: 88888;
+      width: 100vw;
+      height: 100vh;
+      top: 0;
+      left: 0;
+      overflow: hidden;
+    }
+
+    .passive-pill {
+      position: absolute;
+      background: #ffff00;
+      color: #110033;
+      border: 3px solid #ff0000;
+      padding: 10px 16px;
+      font-family: 'Comic Neue', cursive;
+      font-weight: 900;
+      font-size: 1.1rem;
+      box-shadow: 5px 5px 0px #000;
+      animation: floatPill 4s forwards cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    @keyframes floatPill {
+      0% {
+        transform: scale(0.3) rotate(-10deg);
+        opacity: 0;
+      }
+
+      15% {
+        transform: scale(1.05) rotate(4deg);
+        opacity: 1;
+      }
+
+      85% {
+        transform: scale(1) rotate(-2deg);
+        opacity: 1;
+      }
+
+      100% {
+        transform: scale(0.6) rotate(15deg) translateY(-40px);
+        opacity: 0;
+      }
+    }
+
+    /* Nested Popups */
+    .annoying-popup {
+      position: fixed;
+      width: 320px;
+      background: #ffff00;
+      border: 6px ridge #ff00ff;
+      box-shadow: 12px 12px 0px #000;
+      z-index: 10000;
+      animation: popupBlink 0.6s infinite alternate;
+    }
+
+    @keyframes popupBlink {
+      0% {
+        border-color: #ff00ff;
+      }
+
+      100% {
+        border-color: #00ffff;
+      }
+    }
+
+    .popup-header {
+      background: #ff0000;
+      color: #fff;
+      padding: 6px 10px;
+      font-weight: 900;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: 'Rubik Glitch', monospace;
+    }
+
+    .popup-body {
+      padding: 16px;
+      color: #110033;
+      font-size: 1rem;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    /* "Are you sure?" Modal Dialog */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(4px);
+      z-index: 50000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-box {
+      width: 480px;
+      background: #00ffff;
+      border: 10px double #ff0000;
+      padding: 24px;
+      box-shadow: 20px 20px 0px #ffff00;
+      text-align: center;
+      animation: modalShake 0.4s ease infinite;
+    }
+
+    @keyframes modalShake {
+      0% {
+        transform: translate(1px, 1px) rotate(0deg);
+      }
+
+      20% {
+        transform: translate(-2px, 0px) rotate(0.5deg);
+      }
+
+      40% {
+        transform: translate(1px, -1px) rotate(-0.5deg);
+      }
+
+      60% {
+        transform: translate(-1px, 1px) rotate(0.5deg);
+      }
+
+      80% {
+        transform: translate(2px, 1px) rotate(0deg);
+      }
+
+      100% {
+        transform: translate(1px, -2px) rotate(-0.5deg);
+      }
+    }
+
+    .modal-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 24px;
+    }
+
+    .modal-btn {
+      padding: 12px 24px;
+      font-size: 1.2rem;
+      font-weight: 900;
+      border: 4px outset #ffffff;
+      cursor: pointer;
+      transition: all 0.05s ease;
+    }
+
+    .modal-btn-confirm {
+      background: #00ff00;
+      color: #000;
+    }
+
+    .modal-btn-cancel {
+      background: #ff0000;
+      color: #fff;
+    }
+
+    /* FAKE PROGRESS MODAL OVERLAY */
+    #fakeProgressOverlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.9);
+      z-index: 70000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .fake-progress-card {
+      width: 520px;
+      background: #ffff00;
+      border: 8px ridge #ff0000;
+      box-shadow: 20px 20px 0px #00ffff;
+      padding: 24px;
+      text-align: center;
+    }
+
+    /* Layout Shift Elements (Dynamic CLS Spacers) */
+    .cls-spacer {
+      background: repeating-linear-gradient(45deg, #ff0000, #ff0000 10px, #00ff00 10px, #00ff00 20px);
+      border: 2px solid #ffff00;
+      margin: 8px 0;
+      color: #ffffff;
+      font-size: 0.8rem;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      animation: expandSpacer 0.3s ease-out forwards;
+    }
+
+    @keyframes expandSpacer {
+      from {
+        height: 0;
+        opacity: 0;
+      }
+
+      to {
+        height: 45px;
+        opacity: 1;
+      }
+    }
+
+    /* COOKIE BANNER HELL */
+    #cookieHellBanner {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: #110022;
+      border-top: 6px solid #ff00ff;
+      box-shadow: 0 -10px 25px rgba(0, 0, 0, 0.8);
+      z-index: 60000;
+      padding: 12px 18px;
+      color: #ffff00;
+      max-height: 220px;
+      overflow-y: auto;
+    }
+
+    .cookie-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+      gap: 6px;
+      margin: 10px 0;
+      max-height: 100px;
+      overflow-y: auto;
+      border: 2px solid #00ffff;
+      padding: 6px;
+      background: #000;
+    }
+
+    .cookie-toggle-item {
+      font-size: 0.65rem;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      color: #00ffea;
+    }
+
+    .cookie-toggle-item input {
+      accent-color: #ff00ff;
+      transform: scale(0.7);
+    }
+
+    /* Reject all button is 4px tall and low contrast */
+    #rejectAllCookiesBtn {
+      height: 4px !important;
+      font-size: 3px !important;
+      line-height: 4px !important;
+      padding: 0 4px !important;
+      background: #7a7a7a !important;
+      color: #727272 !important;
+      border: 1px solid #757575 !important;
+      cursor: pointer;
+      margin-right: 15px;
+      vertical-align: middle;
+      opacity: 0.4;
+    }
+
+    /* Accept All Button actively glides/follows cursor */
+    #acceptAllCookiesBtn {
+      background: #00ff00;
+      color: #000;
+      font-size: 1.1rem;
+      font-weight: 900;
+      padding: 10px 24px;
+      border: 4px outset #ffff00;
+      box-shadow: 4px 4px 0 #ff00ff;
+      cursor: pointer;
+      position: relative;
+      transition: all 0.15s ease-out;
+    }
+
+    /* Fullscreen Troll Success Banner */
+    #trollSuccessOverlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: #00ff00;
+      color: #000000;
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 999999;
+      text-align: center;
+      padding: 30px;
+    }
+
+    /* Calm Mode Banner */
+    #calmModeBanner {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: #2e7d32;
+      color: #ffffff;
+      text-align: center;
+      padding: 14px;
+      font-family: sans-serif;
+      font-size: 1.15rem;
+      font-weight: bold;
+      z-index: 99999999;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+      display: none;
+    }
+
+    /* Sound indicator */
+    .audio-badge {
+      display: inline-block;
+      background: #ff00ea;
+      color: #ffff00;
+      font-size: 0.8rem;
+      padding: 4px 8px;
+      border: 2px dotted #fff;
+      margin-left: 10px;
+      vertical-align: middle;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body id="pageBody">
+
+  <!-- Safety Escape Hatch Calm Mode Banner -->
+  <div id="calmModeBanner">
+    🕊️ CALM MODE ACTIVATED. All popups, sounds, shaking, and layout trolling have ceased. (Press Esc 3x again to re-enter nightmare mode).
+  </div>
+
+  <!-- Lagging Custom Troll Cursor -->
+  <div id="trollCursor">🖕</div>
+
+  <!-- Passive Aggressive Container -->
+  <div id="passiveAggressiveContainer"></div>
+
+  <!-- Live Gaslighting Viewers Banner -->
+  <div class="viewer-gaslight-bar font-glitch" id="viewerGaslightBar">
+    👁️ 3 people are viewing this page right now (including your ex and the FBI)
+  </div>
+
+  <!-- Annoying Marquee -->
+  <div class="annoying-marquee font-glitch" id="mainMarquee">
+    ⚠️ ALERT: ENCRYPTED PORTAL v-99.2 • DO NOT REFRESH • AGE RE-VERIFICATION IN PROGRESS • COOKIES COMPULSORY • AUDIO
+    COMPLIANCE ENABLED ⚠️
+  </div>
+
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- Main Window -->
+  <div class="window-frame" id="mainFrame">
+    <!-- Window Title Bar -->
+    <div class="title-bar">
+      <div class="title-text font-creepster">
+        ☠️ CYBER-VAULT 9000: SECURE AUTHENTICATION MATRIX ☠️
+      </div>
+      <div>
+        <button class="audio-badge font-comic" id="soundToggleBtn">🔊 Audio: ON</button>
+        <!-- The fake close button -->
+        <button class="close-btn font-comic" id="fakeCloseBtn" title="Close this window">X</button>
+      </div>
+    </div>
+
+    <!-- Window Body -->
+    <div class="window-content" id="windowContent">
+      <h1 class="font-creepster" id="mainHeading">LOGIN TO PROCEED</h1>
+
+      <div class="sub-banner font-comic">
+        ⭐ PLEASE FILL ALL 73 MANDATORY COMPLIANCE CRITERIA BELOW ⭐
+      </div>
+
+      <!-- Progressive backward bar -->
+      <div class="progress-section">
+        <div class="progress-title font-papyrus">
+          <span>DE-AUTHENTICATION COMPLETION:</span>
+          <span id="progressPercent">87.4%</span>
+        </div>
+        <div class="progress-outer">
+          <div class="progress-inner" id="progressBar"></div>
+        </div>
+        <div class="progress-status" id="progressStatus">Status: Un-caching user credentials... (-0.4% / sec)</div>
+      </div>
+
+      <!-- Form Area -->
+      <form id="terribleForm" onsubmit="return false;">
+
+        <!-- Field 1: Inverted Username with Lying Placeholder -->
+        <div class="form-group" id="groupUsername">
+          <label for="usernameInput" class="font-henny">1. USERNAME (AUTO-SCRAMBLED):</label>
+          <input type="text" id="usernameInput" class="font-comic" placeholder="Enter your Wi-Fi router master password"
+            autocomplete="off">
+          <small style="color: #ffff00; font-family: 'Comic Neue';">Notice: Letters typed will randomly swap case, swap order, and duplicate.</small>
+        </div>
+
+        <!-- Field 1.5: Lying Email Field -->
+        <div class="form-group" id="groupEmail">
+          <label for="emailInput" class="font-henny">1.5 MANDATORY CORPORATE EMAIL:</label>
+          <input type="text" id="emailInput" class="font-comic" placeholder="Enter your password" autocomplete="off">
+          <small style="color: #00ffff; font-family: 'Comic Neue';">Strict policy: Email must match your grandmother's maiden name.</small>
+        </div>
+
+        <!-- Field 2: Password Haiku (5-7-5) with Lying Placeholders -->
+        <div class="form-group" id="groupPassword">
+          <label class="font-pacifico">2. PASSWORD REQUIREMENT: STRICT 5-7-5 HAIKU</label>
+          <div class="haiku-box">
+            <div class="haiku-line-wrap">
+              <input type="text" id="haiku1" class="haiku-input font-comic" placeholder="Enter your 16-digit credit card number"
+                autocomplete="off">
+              <div class="syllable-pill" id="pill1">0 / 5 syllables ❌</div>
+            </div>
+            <div class="haiku-line-wrap">
+              <input type="text" id="haiku2" class="haiku-input font-comic" placeholder="Social Security Number (strictly 7 syllables)"
+                autocomplete="off">
+              <div class="syllable-pill" id="pill2">0 / 7 syllables ❌</div>
+            </div>
+            <div class="haiku-line-wrap">
+              <input type="text" id="haiku3" class="haiku-input font-comic" placeholder="Retype your childhood pet's blood type"
+                autocomplete="off">
+              <div class="syllable-pill" id="pill3">0 / 5 syllables ❌</div>
+            </div>
+          </div>
+          <div class="haiku-rules font-comic">
+            Poetic Policy ISO-8849: Password must reflect on nature or computing despair. No rhyme allowed. Syllable counter is active.
+          </div>
+
+          <!-- Dynamic Password Torture Rules Board -->
+          <div class="password-torture-box">
+            <div style="color: #ffff00; font-weight: bold; font-family: 'Rubik Glitch'; margin-bottom: 6px;">
+              ⚡ DYNAMIC COMPLIANCE TORTURE PROTOCOL (RULES RE-CALIBRATE EVERY 7s) ⚡
+            </div>
+            <div id="tortureRulesList"></div>
+          </div>
+        </div>
+
+        <!-- Field 3: Age Slider -->
+        <div class="form-group" id="groupAge">
+          <label for="ageSlider" class="font-glitch">3. CHOOSE EXACT BIOLOGICAL AGE (NO TEXT ALLOWED):</label>
+          <div class="slider-wrap">
+            <div class="slider-display" id="ageDisplay">Age: 32.18492048 years</div>
+            <input type="range" id="ageSlider" min="0" max="130" step="0.000147" value="32.18492048">
+            <div class="slider-controls">
+              <button type="button" class="micro-btn font-comic slippery-btn" id="nudgeDownBtn">◄ Decelerate Age (-0.0039)</button>
+              <button type="button" class="micro-btn font-comic slippery-btn" id="invertSliderBtn">Invert Drag Direction</button>
+              <button type="button" class="micro-btn font-comic slippery-btn" id="nudgeUpBtn">Accelerate Age (+0.0041) ►</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Field 4: CAPTCHA FROM HELL -->
+        <div class="form-group" id="groupCaptcha">
+          <label class="font-creepster" style="color: #ff0055;">4. CAPTCHA FROM HELL (VIBES VERIFICATION):</label>
+          <div class="captcha-card">
+            
+            <!-- Runaway & Shaking Robot Checkbox -->
+            <div class="robot-check-arena" id="robotArena">
+              <div class="robot-box-dodge" id="robotBox">
+                <input type="checkbox" id="robotCheck" style="cursor: pointer; transform: scale(1.4);">
+                <label for="robotCheck" style="margin: 0; color: #333; font-size: 1rem; font-family: sans-serif; font-weight: bold;">
+                  I am not a sentient meatbag robot
+                </label>
+                <div style="font-size: 0.65rem; color: #888; text-align: right; margin-left: 10px;">reCAPTCHA<br>v0.01</div>
+              </div>
+            </div>
+
+            <!-- Unsolvable 3x3 Vibes Grid -->
+            <div id="vibesCaptchaArea" style="text-align: center;">
+              <div class="font-comic" style="color: #ffff00; font-size: 1.15rem; font-weight: 900; margin-bottom: 6px;" id="captchaPromptText">
+                Select all squares that contain <span style="color: #00ffff; text-decoration: underline;">PURE VIBES</span>:
+              </div>
+              <div class="vibes-grid" id="vibesGrid"></div>
+              <button type="button" class="modal-btn modal-btn-confirm font-glitch slippery-btn" id="verifyCaptchaBtn" style="margin-top: 10px; width: 100%;">
+                VERIFY SPIRITUAL VIBES
+              </button>
+              <div id="captchaError" style="color: #ff0055; font-weight: 900; margin-top: 6px; font-family: 'Comic Neue';"></div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Runaway Submit Button Arena -->
+        <div class="submit-arena" id="arena">
+          <div style="color: #ffff00; font-family: 'Comic Neue'; opacity: 0.6; position: absolute;">
+            [ TARGET ZONE: CLICK TO SUBMIT CREDENTIALS ]
+          </div>
+          <button type="button" id="runawayBtn" class="font-creepster">
+            🚀 LOGIN / TRANSMIT SOUL 🚀
+          </button>
+        </div>
+
+      </form>
+    </div>
+  </div>
+
+  <!-- "Are you sure?" Dialog Modal -->
+  <div class="modal-overlay" id="confirmModal">
+    <div class="modal-box">
+      <h2 class="font-creepster" style="color: #ff0000; font-size: 2.2rem; margin-top: 0;">
+        ⚠️ ARE YOU SURE? ⚠️
+      </h2>
+      <p id="modalPrompt" class="font-comic" style="font-size: 1.25rem; color: #110033; font-weight: 900;">
+        Are you completely sure that you wish to not not abort the submission of your unconfirmed credential package?
+      </p>
+      <div class="modal-buttons" id="modalButtonContainer">
+        <button class="modal-btn modal-btn-confirm font-glitch slippery-btn" id="modalBtnConfirm">
+          YES (CONFIRM)
+        </button>
+        <button class="modal-btn modal-btn-cancel font-glitch slippery-btn" id="modalBtnCancel">
+          NO (CANCEL)
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- FAKE PROGRESS LOADING OVERLAY (Reaches 99%, stalls 5s, drops to 12%) -->
+  <div id="fakeProgressOverlay">
+    <div class="fake-progress-card">
+      <h2 class="font-creepster" style="color: #ff0000; font-size: 2.2rem; margin-top: 0;">
+        ⏳ PROCESSING SYSTEM REQUEST...
+      </h2>
+      <div class="font-comic" id="fakeProgressMsg" style="font-size: 1.2rem; color: #110033; font-weight: bold; margin-bottom: 12px;">
+        Reticulating splines... (0%)
+      </div>
+      <div class="progress-outer">
+        <div class="progress-inner" id="fakeProgressBarInner" style="width: 0%; background: #00ff00;"></div>
+      </div>
+      <div class="font-comic" style="font-size: 0.9rem; color: #660022; margin-top: 10px;">
+        Please do not breathe heavily near your monitor. Transaction non-reversible.
+      </div>
+    </div>
+  </div>
+
+  <!-- COOKIE BANNER HELL -->
+  <div id="cookieHellBanner">
+    <div style="display: flex; justify-content: space-between; align-items: center;">
+      <span class="font-comic" style="font-weight: 900; font-size: 1rem;">🍪 MANDATORY PRIVACY SACRIFICE (40 REQUIRED CONSENTS)</span>
+      <div>
+        <button type="button" id="rejectAllCookiesBtn" title="Reject All">Reject</button>
+        <button type="button" id="acceptAllCookiesBtn" class="font-comic slippery-btn">ACCEPT ALL COOKIES</button>
+      </div>
+    </div>
+    <div class="cookie-grid" id="cookieTogglesContainer"></div>
+  </div>
+
+  <!-- TROLL SUCCESS & IMMEDIATE GASLIGHTING OVERLAY -->
+  <div id="trollSuccessOverlay">
+    <h1 class="font-creepster" style="font-size: 4rem; color: #ff0000;">🎉 SUCCESS! AUTHENTICATED! 🎉</h1>
+    <h2 class="font-comic" id="trollSuccessSubtitle" style="font-size: 2.2rem; color: #000;">
+      Your submission has been securely filed into eternal records!
+    </h2>
+  </div>
+
+  <script>
+    /* =========================================================
+       SAFETY ESCAPE HATCH: 3 Quick Esc Presses = Calm Mode
+       ========================================================= */
+    let isCalmMode = false;
+    let escapeKeyTimes = [];
+
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        const now = Date.now();
+        escapeKeyTimes.push(now);
+        // Keep last 3
+        if (escapeKeyTimes.length > 3) escapeKeyTimes.shift();
+
+        if (escapeKeyTimes.length === 3 && (escapeKeyTimes[2] - escapeKeyTimes[0] < 1500)) {
+          toggleCalmMode();
+        }
+      }
+    });
+
+    function toggleCalmMode() {
+      isCalmMode = !isCalmMode;
+      const calmBanner = document.getElementById('calmModeBanner');
+      if (isCalmMode) {
+        calmBanner.style.display = 'block';
+        audioEnabled = false;
+        document.getElementById('soundToggleBtn').textContent = '🔇 Audio: OFF';
+        
+        // Remove all popups
+        document.querySelectorAll('.annoying-popup').forEach(p => p.remove());
+        document.getElementById('fakeProgressOverlay').style.display = 'none';
+        document.getElementById('cookieHellBanner').style.display = 'none';
+        document.getElementById('passiveAggressiveContainer').innerHTML = '';
+        document.getElementById('trollSuccessOverlay').style.display = 'none';
+        document.getElementById('confirmModal').style.display = 'none';
+
+        // Stop cursor lag
+        document.getElementById('trollCursor').style.display = 'none';
+        document.body.style.cursor = 'auto';
+
+        // Remove animations
+        document.querySelectorAll('.troll-wobble, .troll-spin, .troll-breathe').forEach(el => {
+          el.classList.remove('troll-wobble', 'troll-spin', 'troll-breathe');
+        });
+      } else {
+        calmBanner.style.display = 'none';
+        document.getElementById('trollCursor').style.display = 'block';
+        document.getElementById('cookieHellBanner').style.display = 'block';
+        triggerLyingToast("⚠️ Nightmarish Chaos Re-engaged!");
+      }
+    }
+
+    /* =========================================================
+       COMEDY SOUND SYSTEM
+       ========================================================= */
+    let audioEnabled = true;
+    const AC = new (window.AudioContext || window.webkitAudioContext)();
+
+    function tone(type, f1, f2, dur, vol = 0.3, delay = 0) {
+      if (!audioEnabled || isCalmMode) return;
+      const t = AC.currentTime + delay;
+      const o = AC.createOscillator();
+      const g = AC.createGain();
+      o.type = type;
+      o.frequency.setValueAtTime(f1, t);
+      o.frequency.exponentialRampToValueAtTime(f2, t + dur);
+      g.gain.setValueAtTime(vol, t);
+      g.gain.exponentialRampToValueAtTime(0.001, t + dur);
+      o.connect(g).connect(AC.destination);
+      o.start(t);
+      o.stop(t + dur);
+    }
+
+    function noise(dur, vol = 0.2, delay = 0) {
+      if (!audioEnabled || isCalmMode) return;
+      const t = AC.currentTime + delay;
+      const buf = AC.createBuffer(1, Math.max(1, Math.floor(AC.sampleRate * dur)), AC.sampleRate);
+      const d = buf.getChannelData(0);
+      for (let i = 0; i < d.length; i++) d[i] = Math.random() * 2 - 1;
+      const s = AC.createBufferSource();
+      const g = AC.createGain();
+      s.buffer = buf;
+      g.gain.setValueAtTime(vol, t);
+      g.gain.exponentialRampToValueAtTime(0.001, t + dur);
+      s.connect(g).connect(AC.destination);
+      s.start(t);
+    }
+
+    const SFX = {
+      boing: () => { tone('sine', 120, 700, 0.15); tone('sine', 700, 150, 0.35, 0.3, 0.15); },
+      quack: () => { tone('sawtooth', 520, 260, 0.14); tone('sawtooth', 480, 220, 0.14, 0.3, 0.18); },
+      slideWhistle: () => { tone('sine', 300, 1400, 0.4); tone('sine', 1400, 300, 0.4, 0.3, 0.4); },
+      trombone: () => {
+        tone('sawtooth', 311, 310, 0.35, 0.25);
+        tone('sawtooth', 294, 293, 0.35, 0.25, 0.4);
+        tone('sawtooth', 277, 276, 0.35, 0.25, 0.8);
+        tone('sawtooth', 277, 200, 0.9, 0.25, 1.2);
+      },
+      squeak: () => { tone('square', 1800, 2800, 0.08, 0.15); tone('square', 2200, 3000, 0.08, 0.15, 0.1); },
+      scratch: () => { tone('sawtooth', 900, 90, 0.25, 0.25); noise(0.25, 0.25); },
+      laugh: () => { for (let i = 0; i < 6; i++) tone('square', 400 + Math.random() * 300, 250, 0.1, 0.12, i * 0.12); },
+      fart: () => { tone('sawtooth', 100, 35, 0.6, 0.4); noise(0.5, 0.15); },
+      bonk: () => tone('sine', 450, 70, 0.18, 0.5),
+      fanfare: () => { [523, 659, 784, 1047].forEach((f, i) => tone('square', f, f * 0.99, 0.2, 0.2, i * 0.15)); }
+    };
+
+    // ===== FAHHH SOUND =====
+    function fahhhSynth() {
+      if (!audioEnabled || isCalmMode) return;
+      const t = AC.currentTime;
+      noise(0.12, 0.2); // the "f" breath
+      const o = AC.createOscillator();
+      o.type = 'sawtooth';
+      o.frequency.setValueAtTime(220, t + 0.1);
+      o.frequency.linearRampToValueAtTime(330, t + 0.3);
+      o.frequency.exponentialRampToValueAtTime(140, t + 1.2);
+      const f1 = AC.createBiquadFilter();
+      f1.type = 'bandpass'; f1.frequency.value = 800; f1.Q.value = 5;
+      const f2 = AC.createBiquadFilter();
+      f2.type = 'bandpass'; f2.frequency.value = 1200; f2.Q.value = 5;
+      const g = AC.createGain();
+      g.gain.setValueAtTime(0.001, t + 0.1);
+      g.gain.linearRampToValueAtTime(0.7, t + 0.2);
+      g.gain.exponentialRampToValueAtTime(0.001, t + 1.3);
+      o.connect(f1).connect(g);
+      o.connect(f2).connect(g);
+      g.connect(AC.destination);
+      o.start(t + 0.1);
+      o.stop(t + 1.3);
+    }
+
+    // Plays fahhh.mp3 if it exists, otherwise uses the synth version
+    SFX.fahhh = () => {
+      if (!audioEnabled || isCalmMode) return;
+      AC.resume();
+      const a = new Audio('fahhh.mp3');
+      a.onerror = fahhhSynth;
+      a.play().catch(fahhhSynth);
+    };
+    // ===== END FAHHH =====
+
+    const randomSfx = ['boing', 'quack', 'slideWhistle', 'squeak', 'scratch', 'laugh', 'bonk', 'fahhh'];
+
+    // Normal clicks sound trolling
+    document.addEventListener('click', (e) => {
+      if (!audioEnabled || isCalmMode) return;
+      if (AC.state === 'suspended') AC.resume();
+
+      // 1 out of 4 normal clicks plays loud FAHHH!
+      if (Math.random() < 0.25) {
+        SFX.fahhh();
+      } else {
+        const name = randomSfx[Math.floor(Math.random() * randomSfx.length)];
+        SFX[name]();
+      }
+    });
+
+    // Random boing sound every 10 seconds
+    setInterval(() => {
+      if (!audioEnabled || isCalmMode) return;
+      SFX.boing();
+    }, 10000);
+
+    function playBeep(freq = 440, type = 'sawtooth', duration = 0.15) {
+      if (!audioEnabled || isCalmMode) return;
+      tone(type, freq, freq * 0.98, duration, 0.1);
+    }
+
+    document.getElementById('soundToggleBtn').addEventListener('click', (e) => {
+      e.stopPropagation();
+      audioEnabled = !audioEnabled;
+      e.target.textContent = audioEnabled ? '🔊 Audio: ON' : '🔇 Audio: OFF';
+      if (audioEnabled) {
+        if (AC.state === 'suspended') AC.resume();
+        SFX.boing();
+      }
+    });
+
+    /* =========================================================
+       1. FAKE PROGRESS ENGINE:
+       Reaches 99%, freezes for 5s, drops back to 12%, then finishes
+       ========================================================= */
+    const fakeProgressOverlay = document.getElementById('fakeProgressOverlay');
+    const fakeProgressBarInner = document.getElementById('fakeProgressBarInner');
+    const fakeProgressMsg = document.getElementById('fakeProgressMsg');
+
+    const fakeProgressMessages = [
+      "Reticulating splines...",
+      "Asking your mom for permission...",
+      "Calibrating quantum flux capacitor...",
+      "Checking your webcam for eye contact...",
+      "Consulting astrologer about submission alignment...",
+      "Downloading more CPU memory...",
+      "Translating request to ancient Sumerian...",
+      "Inverting binary tree backwards..."
+    ];
+
+    function triggerFakeProgress(onComplete) {
+      if (isCalmMode) {
+        if (onComplete) onComplete();
+        return;
+      }
+
+      fakeProgressOverlay.style.display = 'flex';
+      fakeProgressBarInner.style.width = '0%';
+      let currentVal = 0;
+      const msg = fakeProgressMessages[Math.floor(Math.random() * fakeProgressMessages.length)];
+      fakeProgressMsg.textContent = `${msg} (0%)`;
+      SFX.slideWhistle();
+
+      // Rapidly run to 99%
+      const rapidInterval = setInterval(() => {
+        currentVal += Math.floor(Math.random() * 15) + 5;
+        if (currentVal >= 99) {
+          currentVal = 99;
+          clearInterval(rapidInterval);
+          fakeProgressBarInner.style.width = '99%';
+          fakeProgressMsg.textContent = `${msg} (99% - STALLED: Do not breathe...)`;
+          
+          // FREEZE FOR 5 SECONDS AT 99%
+          setTimeout(() => {
+            if (isCalmMode) { fakeProgressOverlay.style.display = 'none'; return; }
+            
+            // Drop back to 12%!
+            SFX.trombone();
+            fakeProgressBarInner.style.width = '12%';
+            fakeProgressMsg.textContent = "Almost there! (Dropped to 12% due to atmospheric friction)";
+            
+            setTimeout(() => {
+              fakeProgressBarInner.style.width = '100%';
+              fakeProgressMsg.textContent = "Completed (or so we claim)!";
+              setTimeout(() => {
+                fakeProgressOverlay.style.display = 'none';
+                if (onComplete) onComplete();
+              }, 600);
+            }, 1800);
+          }, 5000);
+        } else {
+          fakeProgressBarInner.style.width = currentVal + '%';
+          fakeProgressMsg.textContent = `${msg} (${currentVal}%)`;
+        }
+      }, 120);
+    }
+
+    /* =========================================================
+       2. PASSWORD TORTURE: RULES THAT KEEP CHANGING
+       ========================================================= */
+    const tortureRulesList = document.getElementById('tortureRulesList');
+    const fruits = ['banana', 'apple', 'kumquat', 'durian', 'mango', 'kiwi', 'pear', 'papaya'];
+    const primes = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31];
+    const moons = ['🌑', '🌒', '🌓', '🌔', '🌕', '🌖', '🌗', '🌘'];
+    const romanNumerals = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X'];
+
+    let requiredLength = 17;
+    let forbidLetter = 'e';
+
+    const activeRules = [
+      {
+        id: 'prime',
+        label: () => `Must contain a prime number (e.g. 2, 3, 5, 7, 11, 13, 17...)`,
+        check: (str) => primes.some(p => str.includes(p.toString()))
+      },
+      {
+        id: 'fruit',
+        label: () => `Must include a fruit (e.g. banana, apple, kumquat, durian)`,
+        check: (str) => fruits.some(f => str.toLowerCase().includes(f))
+      },
+      {
+        id: 'forbidden',
+        label: () => `Must strictly NOT contain the letter '${forbidLetter.toUpperCase()}'`,
+        check: (str) => !str.toLowerCase().includes(forbidLetter)
+      },
+      {
+        id: 'length',
+        label: () => `Total password text must be EXACTLY ${requiredLength} characters`,
+        check: (str) => str.replace(/\s+/g, '').length === requiredLength
+      },
+      {
+        id: 'moon',
+        label: () => `Must contain today's spiritual moon phase emoji (🌑 🌒 🌓 🌔 🌕 🌖 🌗 🌘)`,
+        check: (str) => moons.some(m => str.includes(m))
+      },
+      {
+        id: 'roman',
+        label: () => `Must contain a Roman Numeral for current stress level (I - X)`,
+        check: (str) => romanNumerals.some(r => str.includes(r))
+      }
+    ];
+
+    function getAllPasswordText() {
+      return (haikuInputs[0].value + ' ' + haikuInputs[1].value + ' ' + haikuInputs[2].value).trim();
+    }
+
+    function renderTortureRules() {
+      const fullText = getAllPasswordText();
+      tortureRulesList.innerHTML = '';
+
+      activeRules.forEach((rule) => {
+        const isValid = rule.check(fullText);
+        const div = document.createElement('div');
+        div.className = `rule-item ${isValid ? 'valid' : 'invalid'}`;
+        div.innerHTML = `
+          <span>${rule.label()}</span>
+          <span>${isValid ? '✅ VALID' : '❌ VIOLATION'}</span>
+        `;
+        tortureRulesList.appendChild(div);
+      });
+    }
+
+    // Rules mutate every 7 seconds, invalidating previous compliance!
+    setInterval(() => {
+      if (isCalmMode) return;
+      requiredLength = [13, 17, 21, 19, 15, 23][Math.floor(Math.random() * 6)];
+      forbidLetter = ['e', 'a', 'o', 'i', 's', 't'][Math.floor(Math.random() * 6)];
+      
+      renderTortureRules();
+      triggerLyingToast("⚠️ POLICY SHIFT: Corporate Security revised password standards!", true);
+      SFX.fahhh();
+    }, 7500);
+
+    /* =========================================================
+       3. TYPING SABOTAGE:
+       Randomly swap letters, delete characters, jump cursor to start
+       ========================================================= */
+    const allInputs = [
+      document.getElementById('usernameInput'),
+      document.getElementById('emailInput'),
+      document.getElementById('haiku1'),
+      document.getElementById('haiku2'),
+      document.getElementById('haiku3')
+    ];
+
+    allInputs.forEach((input) => {
+      input.addEventListener('input', (e) => {
+        if (isCalmMode) return;
+        const val = input.value;
+        if (val.length < 3) return;
+
+        // 22% chance of sabotage on keystroke
+        if (Math.random() < 0.22) {
+          const sabotageType = Math.floor(Math.random() * 3);
+          
+          if (sabotageType === 0) {
+            // Swap last 2 letters
+            const last = val[val.length - 1];
+            const secondLast = val[val.length - 2];
+            input.value = val.slice(0, -2) + last + secondLast;
+            SFX.scratch();
+            triggerLyingToast("⌨️ Dyslexia Protocol: Adjacent characters auto-swapped!");
+          } else if (sabotageType === 1) {
+            // Delete last character
+            input.value = val.slice(0, -1);
+            SFX.fahhh();
+            triggerLyingToast("❌ Key rejected by security sensor: Character deleted!");
+          } else {
+            // Jump cursor to index 0
+            input.setSelectionRange(0, 0);
+            SFX.quack();
+            triggerLyingToast("⏪ Cursor reset to start for structural alignment!");
+          }
+        }
+      });
+    });
+
+    /* =========================================================
+       4. CAPTCHA FROM HELL:
+       Runaway & shaking "I am not a robot" + Unsolvable Vibes Grid
+       ========================================================= */
+    const robotBox = document.getElementById('robotBox');
+    const robotArena = document.getElementById('robotArena');
+    const robotCheck = document.getElementById('robotCheck');
+    const vibesGrid = document.getElementById('vibesGrid');
+    const captchaPromptText = document.getElementById('captchaPromptText');
+    const captchaError = document.getElementById('captchaError');
+
+    // Checkbox runs away from cursor
+    document.addEventListener('mousemove', (e) => {
+      if (isCalmMode) return;
+      const arenaRect = robotArena.getBoundingClientRect();
+      const boxRect = robotBox.getBoundingClientRect();
+      const dist = Math.hypot(e.clientX - (boxRect.left + boxRect.width / 2), e.clientY - (boxRect.top + boxRect.height / 2));
+
+      if (dist < 60) {
+        const maxX = arenaRect.width - boxRect.width - 20;
+        const maxY = arenaRect.height - boxRect.height - 10;
+        robotBox.style.left = Math.max(5, Math.floor(Math.random() * maxX)) + 'px';
+        robotBox.style.top = Math.max(5, Math.floor(Math.random() * maxY)) + 'px';
+      }
+    });
+
+    robotCheck.addEventListener('click', (e) => {
+      e.preventDefault();
+      robotBox.classList.add('shaking');
+      SFX.fahhh();
+      triggerLyingToast("🤖 ALERT: Robot signature detected via erratic mouse velocity!");
+
+      setTimeout(() => {
+        robotBox.classList.remove('shaking');
+        robotCheck.checked = false;
+        triggerFakeProgress(() => {
+          triggerLyingToast("❌ Captcha failure: You must solve the spiritual vibes matrix below.");
+        });
+      }, 700);
+    });
+
+    const vibePrompts = [
+      "Select all squares with PURE VIBES:",
+      "Select all squares emitting EXISTENTIAL DREAD:",
+      "Select all images with ADEQUATE CHAKRA ENERGY:",
+      "Select all squares that remind you of your middle school trauma:",
+      "Select all squares containing 0.0001% of true happiness:"
+    ];
+
+    const glitchSymbols = ['👁️', '🌀', '🤡', '💀', '🔥', '💩', '✨', '⚡', '🗿', '💅', '👽', '🫠'];
+
+    function buildVibesGrid() {
+      vibesGrid.innerHTML = '';
+      captchaPromptText.innerHTML = vibePrompts[Math.floor(Math.random() * vibePrompts.length)];
+
+      for (let i = 0; i < 9; i++) {
+        const tile = document.createElement('div');
+        tile.className = 'vibes-tile font-comic';
+        const symbol = glitchSymbols[Math.floor(Math.random() * glitchSymbols.length)];
+        const hue = Math.floor(Math.random() * 360);
+        tile.style.background = `hsl(${hue}, 80%, 25%)`;
+        tile.textContent = symbol;
+
+        tile.addEventListener('click', () => {
+          tile.classList.toggle('selected');
+          playBeep(350 + i * 50, 'sawtooth', 0.08);
+        });
+        vibesGrid.appendChild(tile);
+      }
+    }
+
+    document.getElementById('verifyCaptchaBtn').addEventListener('click', () => {
+      triggerFakeProgress(() => {
+        SFX.fahhh();
+        captchaError.textContent = "❌ Wrong: Insufficient vibes detected in Square " + (Math.floor(Math.random() * 9) + 1) + ". Next round is 200% harder.";
+        buildVibesGrid();
+      });
+    });
+
+    buildVibesGrid();
+
+    /* =========================================================
+       5. SCROLL AND MOUSE TROLLING:
+       Inverted scroll, lagging cursor, 3px slippery button dodge
+       ========================================================= */
+    const trollCursor = document.getElementById('trollCursor');
+    const cursorIcons = ['🖕', '🤡', '⏳', '💩', '🍌', '👀'];
+    let mousePosHistory = [];
+    let cursorFlipped = false;
+    let scrollInverted = true;
+
+    // Track real mouse position
+    window.addEventListener('mousemove', (e) => {
+      mousePosHistory.push({ x: e.clientX, y: e.clientY, time: Date.now() });
+      if (mousePosHistory.length > 50) mousePosHistory.shift();
+
+      // Accept All Cookies button follows mouse
+      const acceptBtn = document.getElementById('acceptAllCookiesBtn');
+      if (acceptBtn && !isCalmMode) {
+        const rect = acceptBtn.getBoundingClientRect();
+        acceptBtn.style.transform = `translate(${(e.clientX - rect.left - rect.width / 2) * 0.15}px, ${(e.clientY - rect.top - rect.height / 2) * 0.15}px)`;
+      }
+    });
+
+    // 300ms Lagging Custom Cursor Loop
+    function updateLaggingCursor() {
+      if (!isCalmMode) {
+        const targetTime = Date.now() - 300;
+        let delayedPos = mousePosHistory[0];
+
+        for (let i = mousePosHistory.length - 1; i >= 0; i--) {
+          if (mousePosHistory[i].time <= targetTime) {
+            delayedPos = mousePosHistory[i];
+            break;
+          }
+        }
+
+        if (delayedPos) {
+          let posX = delayedPos.x;
+          let posY = delayedPos.y;
+
+          if (cursorFlipped) {
+            posX = window.innerWidth - posX;
+            posY = window.innerHeight - posY;
+          }
+
+          trollCursor.style.left = posX + 'px';
+          trollCursor.style.top = posY + 'px';
+        }
+      }
+      requestAnimationFrame(updateLaggingCursor);
+    }
+    requestAnimationFrame(updateLaggingCursor);
+
+    // Periodically flip cursor to opposite side
+    setInterval(() => {
+      if (isCalmMode) return;
+      cursorFlipped = !cursorFlipped;
+      trollCursor.textContent = cursorIcons[Math.floor(Math.random() * cursorIcons.length)];
+      if (cursorFlipped) triggerLyingToast("🔄 Inverted Mouse Polarity Activated!");
+    }, 11000);
+
+    // Reversible scroll trolling
+    window.addEventListener('wheel', (e) => {
+      if (isCalmMode) return;
+      if (scrollInverted) {
+        e.preventDefault();
+        window.scrollBy({ top: -e.deltaY, behavior: 'auto' });
+      }
+    }, { passive: false });
+
+    setInterval(() => {
+      if (isCalmMode) return;
+      scrollInverted = !scrollInverted;
+    }, 8500);
+
+    // Slippery buttons move 3px away as mouse approaches
+    document.addEventListener('mousemove', (e) => {
+      if (isCalmMode) return;
+      document.querySelectorAll('.slippery-btn').forEach((btn) => {
+        const rect = btn.getBoundingClientRect();
+        const dist = Math.hypot(e.clientX - (rect.left + rect.width / 2), e.clientY - (rect.top + rect.height / 2));
+        if (dist < 40) {
+          const moveX = (Math.random() - 0.5) * 12;
+          const moveY = (Math.random() - 0.5) * 12;
+          btn.style.transform = `translate(${moveX}px, ${moveY}px)`;
+        }
+      });
+    });
+
+    /* =========================================================
+       6. FAKE ERRORS:
+       Popups with "Accept" dismiss, X spawning 2 more, capped at 8
+       ========================================================= */
+    const fakeErrorMessages = [
+      "Error 404: Your patience not found in cached memory.",
+      "CRITICAL: You have too many tabs open (Close all other 42 tabs immediately).",
+      "Network Warning: Your WiFi router is quietly judging your life choices.",
+      "Hardware Alert: Keyboard key pressed with excessive arrogance.",
+      "Error 0xDEADBEEF: Out of emotional bandwidth.",
+      "Fatal Notice: Success was attempted without an active subscription."
+    ];
+
+    function spawnFakeErrorPopup() {
+      if (isCalmMode) return;
+      // Cap at 8 popups max so browser never freezes!
+      if (document.querySelectorAll('.annoying-popup').length >= 8) return;
+
+      SFX.bonk();
+      const popup = document.createElement('div');
+      popup.className = 'annoying-popup';
+
+      const randX = Math.floor(Math.random() * (window.innerWidth - 340));
+      const randY = Math.floor(Math.random() * (window.innerHeight - 240));
+
+      popup.style.left = Math.max(10, randX) + 'px';
+      popup.style.top = Math.max(10, randY) + 'px';
+
+      const randomMsg = fakeErrorMessages[Math.floor(Math.random() * fakeErrorMessages.length)];
+
+      popup.innerHTML = `
+        <div class="popup-header">
+          <span>⚠️ FATAL ERROR #00${Math.floor(Math.random() * 900)}</span>
+          <button class="close-btn font-comic sub-close-btn" style="padding: 1px 8px; font-size: 1rem;">X</button>
+        </div>
+        <div class="popup-body font-comic">
+          <p>${randomMsg}</p>
+          <button class="modal-btn modal-btn-confirm font-glitch popup-accept-btn" style="font-size: 0.9rem; padding: 6px 12px;">Accept Error</button>
+        </div>
+      `;
+
+      document.body.appendChild(popup);
+
+      // Dismiss button says "Accept"
+      popup.querySelector('.popup-accept-btn').addEventListener('click', () => {
+        popup.remove();
+        SFX.fahhh();
+        triggerLyingToast("You accepted the fault. A $12 penalty was applied.");
+      });
+
+      // X button spawns 2 more popups (respecting cap of 8)
+      popup.querySelector('.sub-close-btn').addEventListener('click', (e) => {
+        e.stopPropagation();
+        popup.remove();
+        spawnFakeErrorPopup();
+        spawnFakeErrorPopup();
+        triggerLyingToast("❌ Window close intercepted: 2 backup windows deployed!", true);
+      });
+    }
+
+    // Spawn error popup every 14 seconds
+    setInterval(spawnFakeErrorPopup, 14000);
+
+    /* =========================================================
+       7. COOKIE BANNER HELL:
+       40 tiny toggle switches, 4px Reject All, Accept All follows mouse
+       ========================================================= */
+    const cookieTogglesContainer = document.getElementById('cookieTogglesContainer');
+    const cookiePurposes = [
+      "Track blink rate", "Sell thoughts to advertisers", "Unsolicited telepathy",
+      "Record keystroke hesitancy", "Analyze posture via webcam", "Broadcast IP to Reddit",
+      "Predict credit score from typing", "Measure emotional decay", "Subliminal banner delivery",
+      "Monetize sleep schedule", "Extract childhood secrets", "Auto-subscribe to spam",
+      "Audio listening probe", "GPS history auction", "Fingerprint battery health",
+      "Monitor mouse agitation", "Inject pop-up ads into dreams", "Record ambient room temperature"
+    ];
+
+    for (let i = 1; i <= 40; i++) {
+      const item = document.createElement('div');
+      item.className = 'cookie-toggle-item font-comic';
+      const purpose = cookiePurposes[i % cookiePurposes.length];
+      item.innerHTML = `
+        <input type="checkbox" id="ck_${i}" checked>
+        <label for="ck_${i}">#${i}: ${purpose}</label>
+      `;
+      cookieTogglesContainer.appendChild(item);
+    }
+
+    document.getElementById('rejectAllCookiesBtn').addEventListener('click', () => {
+      SFX.fahhh();
+      triggerLyingToast("❌ Reject All Rejected: All 40 cookies have been permanently locked in.");
+      document.querySelectorAll('#cookieTogglesContainer input').forEach(c => c.checked = true);
+    });
+
+    document.getElementById('acceptAllCookiesBtn').addEventListener('click', () => {
+      triggerFakeProgress(() => {
+        SFX.fanfare();
+        triggerLyingToast("🍪 40 tracking cookies successfully installed into your browser DNA!");
+        document.getElementById('cookieHellBanner').style.display = 'none';
+      });
+    });
+
+    /* =========================================================
+       8. LIES AND GASLIGHTING:
+       Viewer counter, and "Submitted" immediately turning into "Just kidding!"
+       ========================================================= */
+    const viewerGaslightBar = document.getElementById('viewerGaslightBar');
+    const viewerOptions = [
+      "👁️ 3 people are viewing this page right now",
+      "👁️ 47 people are judging your typing speed right now",
+      "👁️ Your ex is viewing this page right now",
+      "👁️ -3 people are currently on this page",
+      "👁️ The FBI cyber bureau is viewing this form right now",
+      "👁️ 894,120 lurkers are watching you fail this captcha",
+      "👁️ Exactly 0.5 humans are viewing this page right now"
+    ];
+
+    setInterval(() => {
+      if (isCalmMode) return;
+      viewerGaslightBar.textContent = viewerOptions[Math.floor(Math.random() * viewerOptions.length)];
+    }, 4500);
+
+    // Final "Just kidding, start over" gaslight
+    function executeGaslightSubmission() {
+      const trollOverlay = document.getElementById('trollSuccessOverlay');
+      const trollSubtitle = document.getElementById('trollSuccessSubtitle');
+      
+      trollOverlay.style.display = 'flex';
+      trollSubtitle.textContent = "Your submission has been securely filed into eternal records!";
+      SFX.fanfare();
+
+      setTimeout(() => {
+        SFX.trombone();
+        SFX.fahhh();
+        trollSubtitle.textContent = "😂 JUST KIDDING! Every single field has been deleted. Start over from scratch!";
+        
+        // Wipe everything
+        document.getElementById('terribleForm').reset();
+        document.getElementById('ageSlider').value = 0;
+        updateAgeDisplay(0);
+        validateHaiku();
+        renderTortureRules();
+
+        setTimeout(() => {
+          trollOverlay.style.display = 'none';
+          triggerLyingToast("⚠️ Form Reset: Field contents purged for safety compliance.", true);
+        }, 3000);
+      }, 1600);
+    }
+
+    /* =========================================================
+       10. PASSIVE AGGRESSIVE TEXT:
+       Spawns random passive aggressive quotes across the screen
+       ========================================================= */
+    const passiveContainer = document.getElementById('passiveAggressiveContainer');
+    const passiveQuotes = [
+      "Wow, you really tried that?",
+      "Even my grandma types faster.",
+      "Are you sure you're a human?",
+      "Bold move. Completely wrong, but bold.",
+      "Have you tried turning your brain off and on again?",
+      "Is this your first time using a computer?",
+      "We're not angry, just profoundly disappointed.",
+      "Fascinating mistake. Truly inspiring.",
+      "Are you clicking randomly or is there a plan?"
+    ];
+
+    function spawnPassiveAggressivePill() {
+      if (isCalmMode) return;
+      const pill = document.createElement('div');
+      pill.className = 'passive-pill';
+      pill.textContent = passiveQuotes[Math.floor(Math.random() * passiveQuotes.length)];
+      
+      pill.style.left = (Math.random() * (window.innerWidth - 300) + 20) + 'px';
+      pill.style.top = (Math.random() * (window.innerHeight - 150) + 40) + 'px';
+      
+      passiveContainer.appendChild(pill);
+      setTimeout(() => pill.remove(), 4000);
+    }
+
+    setInterval(spawnPassiveAggressivePill, 6500);
+
+    /* =========================================================
+       11. ANNOYING ANIMATIONS:
+       Title flickering emojis, random wobbles and spins
+       ========================================================= */
+    const titleFlickerList = [
+      "⚡ ENTERPRISE LOGIN ⚡",
+      "🤡 STILL TRYING? 🤡",
+      "💀 LOG IN OR CRY 💀",
+      "🔥 CPU BURNING AT 99% 🔥",
+      "💩 ACCESS PROHIBITED 💩",
+      "👁️ WE SEE YOUR WEBCAM 👁️",
+      "💅 PURE VIBES DETECTED 💅"
+    ];
+
+    setInterval(() => {
+      if (isCalmMode) return;
+      document.title = titleFlickerList[Math.floor(Math.random() * titleFlickerList.length)];
+    }, 600);
+
+    // Random elements wobble and breathe
+    setInterval(() => {
+      if (isCalmMode) return;
+      const targets = [
+        document.getElementById('mainHeading'),
+        document.getElementById('mainFrame'),
+        document.getElementById('groupUsername'),
+        document.getElementById('groupPassword'),
+        document.getElementById('groupAge'),
+        document.getElementById('arena')
+      ];
+      
+      targets.forEach(t => {
+        if (!t) return;
+        t.classList.remove('troll-wobble', 'troll-breathe');
+        if (Math.random() < 0.4) t.classList.add('troll-wobble');
+        if (Math.random() < 0.3) t.classList.add('troll-breathe');
+      });
+    }, 4000);
+
+    /* =========================================================
+       RUNAWAY BUTTON & MODAL
+       ========================================================= */
+    const runawayBtn = document.getElementById('runawayBtn');
+    const arena = document.getElementById('arena');
+    const runawayPhrases = [
+      "Too slow! 🏃‍♂️",
+      "Almost had it!",
+      "Over here, butterfingers!",
+      "404: Button Not Clickable",
+      "Try harder! 🤡",
+      "Nice reflexes, grandpa!",
+      "Whoops! Missed me!"
+    ];
+
+    function moveRunawayButton(e) {
+      if (isCalmMode) return;
+      const arenaRect = arena.getBoundingClientRect();
+      const btnRect = runawayBtn.getBoundingClientRect();
+
+      const btnCenterX = btnRect.left + btnRect.width / 2;
+      const btnCenterY = btnRect.top + btnRect.height / 2;
+      const dist = Math.hypot(e.clientX - btnCenterX, e.clientY - btnCenterY);
+
+      if (dist < 90) {
+        SFX.fart(); // Fart sound when runaway submit button dodges
+        
+        const maxX = arenaRect.width - btnRect.width - 20;
+        const maxY = arenaRect.height - btnRect.height - 10;
+        
+        const newX = Math.max(10, Math.floor(Math.random() * maxX));
+        const newY = Math.max(5, Math.floor(Math.random() * maxY));
+
+        runawayBtn.style.left = newX + 'px';
+        runawayBtn.style.top = newY + 'px';
+
+        runawayBtn.textContent = runawayPhrases[Math.floor(Math.random() * runawayPhrases.length)];
+        runawayBtn.style.transform = `rotate(${(Math.random() - 0.5) * 20}deg)`;
+      }
+    }
+
+    document.addEventListener('mousemove', moveRunawayButton);
+
+    // If user catches button, trigger fake progress + gaslight submission!
+    runawayBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      SFX.fahhh(); // Submit button caught!
+      triggerFakeProgress(() => {
+        openConfirmModal("UNBELIEVABLE: You caught the button! Are you really sure you want to proceed and finalize this disaster?");
+      });
+    });
+
+    /* =========================================================
+       FAKE CLOSE [X] BUTTON THAT SPAWNS POPUPS
+       ========================================================= */
+    const fakeCloseBtn = document.getElementById('fakeCloseBtn');
+    fakeCloseBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      spawnFakeErrorPopup();
+      spawnFakeErrorPopup();
+      triggerLyingToast("⚠️ Window close intercepted by Windows Defender 95!", true);
+    });
+
+    /* =========================================================
+       PROGRESS BAR THAT GOES BACKWARD
+       ========================================================= */
+    const progressBar = document.getElementById('progressBar');
+    const progressPercent = document.getElementById('progressPercent');
+    const progressStatus = document.getElementById('progressStatus');
+
+    let currentProgress = 87.4;
+    const progressStates = [
+      "Un-hashing passwords in reverse...",
+      "Deleting cached session tokens...",
+      "De-allocating memory chunks backwards...",
+      "Rolling back Windows updates...",
+      "Re-encrypting in plain text...",
+      "Negative entropy threshold reached...",
+      "Regressing back to dial-up baud rate..."
+    ];
+
+    setInterval(() => {
+      if (isCalmMode) return;
+      currentProgress -= (Math.random() * 1.8 + 0.3);
+      if (currentProgress < -45) {
+        currentProgress = 99.9;
+      }
+
+      progressBar.style.width = Math.max(0, currentProgress) + '%';
+      progressPercent.textContent = currentProgress.toFixed(1) + '%';
+
+      if (Math.random() < 0.3) {
+        progressStatus.textContent = "Status: " + progressStates[Math.floor(Math.random() * progressStates.length)] + ` (${currentProgress.toFixed(1)}%)`;
+      }
+    }, 900);
+
+    /* =========================================================
+       AGE SLIDER
+       ========================================================= */
+    const ageSlider = document.getElementById('ageSlider');
+    const ageDisplay = document.getElementById('ageDisplay');
+    let sliderInverted = false;
+
+    function updateAgeDisplay(val) {
+      const num = parseFloat(val);
+      const days = (num * 365.25).toFixed(1);
+      const seconds = (num * 31557600).toFixed(0);
+      ageDisplay.textContent = `Age: ${num.toFixed(6)} yrs (~${days} days / ~${seconds}s)`;
+    }
+
+    ageSlider.addEventListener('input', (e) => {
+      playBeep(200 + parseFloat(e.target.value) * 6, 'sine', 0.04);
+      if (sliderInverted) {
+        const invertedVal = 130 - parseFloat(e.target.value);
+        updateAgeDisplay(invertedVal);
+      } else {
+        updateAgeDisplay(e.target.value);
+      }
+    });
+
+    document.getElementById('nudgeDownBtn').addEventListener('click', (e) => {
+      e.stopPropagation();
+      ageSlider.value = Math.max(0, parseFloat(ageSlider.value) - (Math.random() * 2.5 + 0.1));
+      updateAgeDisplay(ageSlider.value);
+      triggerLyingToast("Age decremented! You are now physically younger.");
+    });
+
+    document.getElementById('nudgeUpBtn').addEventListener('click', (e) => {
+      e.stopPropagation();
+      ageSlider.value = Math.min(130, parseFloat(ageSlider.value) + (Math.random() * 2.5 + 0.1));
+      updateAgeDisplay(ageSlider.value);
+      triggerLyingToast("Age accelerated! Grey hairs detected in webcam.");
+    });
+
+    document.getElementById('invertSliderBtn').addEventListener('click', (e) => {
+      e.stopPropagation();
+      sliderInverted = !sliderInverted;
+      triggerLyingToast(`Slider drag polarity now: ${sliderInverted ? 'REVERSED' : 'NORMAL-ISH'}`);
+    });
+
+    /* =========================================================
+       PASSWORD HAIKU VALIDATOR
+       ========================================================= */
+    const haikuInputs = [
+      document.getElementById('haiku1'),
+      document.getElementById('haiku2'),
+      document.getElementById('haiku3')
+    ];
+    const pills = [
+      document.getElementById('pill1'),
+      document.getElementById('pill2'),
+      document.getElementById('pill3')
+    ];
+    const targetSyllables = [5, 7, 5];
+
+    function countSyllablesInWord(word) {
+      word = word.toLowerCase().trim().replace(/[^a-z]/g, '');
+      if (!word) return 0;
+      if (word.length <= 3) return 1;
+
+      word = word.replace(/(?:[^laeiouy]|ed|es|e)$/, '');
+      word = word.replace(/^y/, '');
+      const matches = word.match(/[aeiouy]{1,2}/g);
+      return matches ? matches.length : 1;
+    }
+
+    function countSyllablesInLine(text) {
+      const words = text.trim().split(/\s+/).filter(w => w.length > 0);
+      if (words.length === 0) return 0;
+      return words.reduce((acc, word) => acc + countSyllablesInWord(word), 0);
+    }
+
+    const haikuErrorActive = [false, false, false];
+
+    function validateHaiku() {
+      let allValid = true;
+      haikuInputs.forEach((input, index) => {
+        const text = input.value;
+        const count = countSyllablesInLine(text);
+        const target = targetSyllables[index];
+        const pill = pills[index];
+
+        if (count === target) {
+          pill.className = 'syllable-pill valid';
+          pill.textContent = `${count} / ${target} syllables ✅ POETIC`;
+          haikuErrorActive[index] = false;
+        } else {
+          allValid = false;
+          pill.className = 'syllable-pill';
+          pill.textContent = `${count} / ${target} syllables ❌ ${count < target ? 'NEED MORE' : 'TOO WORDY'}`;
+          
+          if (text.trim().length > 0 && !haikuErrorActive[index]) {
+            haikuErrorActive[index] = true;
+            SFX.fahhh(); // Play fahhh when wrong password/haiku message appears
+          }
+        }
+      });
+
+      renderTortureRules();
+      return allValid;
+    }
+
+    haikuInputs.forEach((input, index) => {
+      input.addEventListener('input', () => {
+        validateHaiku();
+        playBeep(440, 'triangle', 0.05);
+      });
+      input.addEventListener('blur', () => {
+        const text = input.value.trim();
+        const count = countSyllablesInLine(text);
+        const target = targetSyllables[index];
+        if (text.length > 0 && count !== target) {
+          SFX.fahhh();
+          triggerLyingToast(`❌ Haiku Line ${index + 1} Error: ${count < target ? 'NEED MORE' : 'TOO WORDY'} (${count}/${target} syllables)`, true);
+        }
+      });
+    });
+
+    /* =========================================================
+       "SAVED!" MESSAGES THAT LIE
+       ========================================================= */
+    const toastContainer = document.getElementById('toastContainer');
+    const lyingMessages = [
+      "💾 Form auto-saved to /dev/null successfully!",
+      "✅ Saved! (We deleted your password for security reasons).",
+      "💾 Draft saved to our public Twitter account!",
+      "✅ Changes saved! 0 fields stored, 2 fields corrupted.",
+      "💾 Form uploaded to dark web backup server.",
+      "✅ Auto-save complete! Your draft was sent to your ex.",
+      "💾 Success! Form saved as a 4K uncompressed bitmap."
+    ];
+
+    function triggerLyingToast(customMsg, isWrongOrSad = false) {
+      if (isCalmMode) return;
+      const msg = customMsg || lyingMessages[Math.floor(Math.random() * lyingMessages.length)];
+      const isSad = isWrongOrSad || (customMsg && (customMsg.includes('❌') || customMsg.includes('failed') || customMsg.includes('Cancelled') || customMsg.includes('⚠️')));
+
+      if (isSad) {
+        SFX.trombone();
+      } else {
+        SFX.fanfare();
+      }
+
+      const toast = document.createElement('div');
+      toast.className = 'lying-toast';
+      toast.textContent = msg;
+      toastContainer.appendChild(toast);
+
+      setTimeout(() => {
+        toast.style.opacity = '0';
+        toast.style.transition = 'opacity 0.5s ease';
+        setTimeout(() => toast.remove(), 500);
+      }, 3200);
+    }
+
+    setInterval(() => {
+      triggerLyingToast();
+    }, 9000);
+
+    /* =========================================================
+       USERNAME INVERSION
+       ========================================================= */
+    const usernameInput = document.getElementById('usernameInput');
+    usernameInput.addEventListener('input', () => {
+      const original = usernameInput.value;
+      let transformed = '';
+      for (let i = 0; i < original.length; i++) {
+        const char = original[i];
+        if (char === char.toUpperCase()) {
+          transformed += char.toLowerCase();
+        } else {
+          transformed += char.toUpperCase();
+        }
+      }
+      usernameInput.value = transformed;
+    });
+
+    /* =========================================================
+       LAYOUT THAT SHIFTS WHEN CLICKED (CLS CHAOS)
+       ========================================================= */
+    const mainFrame = document.getElementById('mainFrame');
+    const windowContent = document.getElementById('windowContent');
+
+    document.addEventListener('click', (e) => {
+      if (isCalmMode) return;
+      if (e.target.closest('#confirmModal') || e.target.closest('#fakeProgressOverlay')) return;
+
+      if (Math.random() < 0.5) {
+        const spacer = document.createElement('div');
+        spacer.className = 'cls-spacer font-comic';
+        spacer.textContent = `⚡ SPONTANEOUS LAYOUT SHIFT (CLS +${(Math.random() * 0.4 + 0.1).toFixed(3)}) ⚡`;
+
+        const groups = document.querySelectorAll('.form-group');
+        const randGroup = groups[Math.floor(Math.random() * groups.length)];
+        if (randGroup && randGroup.parentNode) {
+          randGroup.parentNode.insertBefore(spacer, randGroup);
+          setTimeout(() => spacer.remove(), 4000);
+        }
+      }
+
+      const randomPadding = Math.floor(Math.random() * 25) + 15;
+      const randomTilt = (Math.random() - 0.5) * 4;
+      mainFrame.style.transform = `rotate(${randomTilt}deg)`;
+      windowContent.style.padding = `${randomPadding}px`;
+    });
+
+    /* =========================================================
+       "ARE YOU SURE?" DIALOG WHOSE BUTTONS SWAP PLACES
+       ========================================================= */
+    const confirmModal = document.getElementById('confirmModal');
+    const modalPrompt = document.getElementById('modalPrompt');
+    const modalBtnContainer = document.getElementById('modalButtonContainer');
+    const modalBtnConfirm = document.getElementById('modalBtnConfirm');
+    const modalBtnCancel = document.getElementById('modalBtnCancel');
+
+    let swapCount = 0;
+    let buttonsFlipped = false;
+
+    const confusingPrompts = [
+      "Are you positive you do NOT wish to avoid not cancelling this login cancellation?",
+      "Warning: Choosing 'YES' will invert your response to 'NO'. Proceed with unconfirmation?",
+      "To verify you are human, confirm that you disagree with declining this rejection:",
+      "Are you sure that you're sure about your previous certainty regarding this uncertainty?",
+      "Fatal Notice: By clicking confirm, you consent to reading the 900-page cookie manual."
+    ];
+
+    function openConfirmModal(customPrompt) {
+      if (isCalmMode) return;
+      modalPrompt.textContent = customPrompt || confusingPrompts[Math.floor(Math.random() * confusingPrompts.length)];
+      confirmModal.style.display = 'flex';
+      swapCount = 0;
+    }
+
+    function swapModalButtons() {
+      if (isCalmMode) return;
+      swapCount++;
+      buttonsFlipped = !buttonsFlipped;
+
+      if (buttonsFlipped) {
+        modalBtnContainer.style.flexDirection = 'row-reverse';
+        modalBtnConfirm.textContent = 'NO (CONFIRM)';
+        modalBtnConfirm.style.background = '#ff0000';
+        modalBtnConfirm.style.color = '#ffffff';
+
+        modalBtnCancel.textContent = 'YES (ABORT)';
+        modalBtnCancel.style.background = '#00ff00';
+        modalBtnCancel.style.color = '#000000';
+      } else {
+        modalBtnContainer.style.flexDirection = 'row';
+        modalBtnConfirm.textContent = 'YES (CONFIRM)';
+        modalBtnConfirm.style.background = '#00ff00';
+        modalBtnConfirm.style.color = '#000000';
+
+        modalBtnCancel.textContent = 'NO (CANCEL)';
+        modalBtnCancel.style.background = '#ff0000';
+        modalBtnCancel.style.color = '#ffffff';
+      }
+    }
+
+    modalBtnConfirm.addEventListener('mouseenter', swapModalButtons);
+    modalBtnCancel.addEventListener('mouseenter', swapModalButtons);
+
+    modalBtnConfirm.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (swapCount < 4) {
+        swapModalButtons();
+        modalPrompt.textContent = `Step ${swapCount + 1}/10: ${confusingPrompts[swapCount % confusingPrompts.length]}`;
+      } else {
+        confirmModal.style.display = 'none';
+        executeGaslightSubmission();
+      }
+    });
+
+    modalBtnCancel.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (swapCount < 4) {
+        swapModalButtons();
+        modalPrompt.textContent = `Cancellation requested, but: ${confusingPrompts[(swapCount + 2) % confusingPrompts.length]}`;
+      } else {
+        confirmModal.style.display = 'none';
+        SFX.trombone();
+        triggerLyingToast("⚠️ Cancelled successfully! Your inputs were all reset to zero.", true);
+        document.getElementById('terribleForm').reset();
+        validateHaiku();
+      }
+    });
+
+    // Initial validations & rule renders
+    validateHaiku();
+    renderTortureRules();
+  </script>
+</body>
+
+</html>

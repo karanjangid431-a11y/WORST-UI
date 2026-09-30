@@ -1,0 +1,2376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nimbus Workspace — Unified Enterprise Cloud</title>
+  
+  <!-- Inter Font from Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-page: #f8fafc;
+      --bg-surface: #ffffff;
+      --bg-subtle: #f1f5f9;
+      --border-color: #e2e8f0;
+      --border-focus: #3b82f6;
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --text-light: #94a3b8;
+      --accent-blue: #2563eb;
+      --accent-hover: #1d4ed8;
+      --accent-subtle: #eff6ff;
+      --danger: #ef4444;
+      --success: #10b981;
+      --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+      --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.07), 0 2px 4px -2px rgb(0 0 0 / 0.07);
+      --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.08), 0 4px 6px -4px rgb(0 0 0 / 0.08);
+      --radius-sm: 6px;
+      --radius-md: 10px;
+      --radius-lg: 14px;
+      --transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* Dark Mode Temporary Sync */
+    body.dark-mode-temp {
+      --bg-page: #0f172a;
+      --bg-surface: #1e293b;
+      --bg-subtle: #334155;
+      --border-color: #334155;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --text-light: #64748b;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-page);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+      transition: background-color 0.4s ease, color 0.4s ease;
+    }
+
+    /* Demo Mode Banner */
+    #demoModeBanner {
+      display: none;
+      background: #059669;
+      color: #ffffff;
+      padding: 10px 16px;
+      text-align: center;
+      font-size: 0.875rem;
+      font-weight: 500;
+      position: sticky;
+      top: 0;
+      z-index: 999999;
+    }
+
+    /* Top Navigation Bar */
+    .navbar {
+      height: 60px;
+      background: var(--bg-surface);
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 24px;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .brand-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      font-size: 1.05rem;
+      color: var(--text-main);
+      text-decoration: none;
+      letter-spacing: -0.02em;
+    }
+
+    .brand-icon {
+      width: 28px;
+      height: 28px;
+      background: linear-gradient(135deg, var(--accent-blue), #60a5fa);
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+    }
+
+    .workspace-pill {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      background: var(--bg-subtle);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      font-size: 0.8125rem;
+      color: var(--text-muted);
+      cursor: pointer;
+    }
+
+    /* Search Bar with Dropdown */
+    .search-wrapper {
+      position: relative;
+      width: 380px;
+    }
+
+    .search-input-wrap {
+      display: flex;
+      align-items: center;
+      background: var(--bg-subtle);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      padding: 6px 12px;
+      transition: var(--transition-fast);
+    }
+
+    .search-input-wrap:focus-within {
+      background: var(--bg-surface);
+      border-color: var(--border-focus);
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.12);
+    }
+
+    .search-input {
+      border: none;
+      background: transparent;
+      outline: none;
+      font-size: 0.875rem;
+      width: 100%;
+      color: var(--text-main);
+      margin-left: 8px;
+    }
+
+    .search-kbd {
+      font-size: 0.7rem;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      padding: 1px 5px;
+      border-radius: 4px;
+      color: var(--text-light);
+    }
+
+    .search-dropdown {
+      position: absolute;
+      top: calc(100% + 6px);
+      left: 0;
+      width: 100%;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-lg);
+      display: none;
+      flex-direction: column;
+      padding: 6px 0;
+      z-index: 10000;
+    }
+
+    .search-suggestion-item {
+      padding: 9px 16px;
+      font-size: 0.85rem;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      transition: background 0.1s ease;
+    }
+
+    .search-suggestion-item:hover {
+      background: var(--bg-subtle);
+    }
+
+    .search-results-overlay {
+      position: absolute;
+      top: calc(100% + 6px);
+      left: 0;
+      width: 100%;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-lg);
+      padding: 16px;
+      display: none;
+      z-index: 10001;
+    }
+
+    .skeleton-loader {
+      height: 14px;
+      background: linear-gradient(90deg, #f1f5f9 25%, #e2e8f0 50%, #f1f5f9 75%);
+      background-size: 200% 100%;
+      animation: skeletonPulse 1.8s infinite;
+      border-radius: 4px;
+      margin: 10px 0;
+    }
+
+    @keyframes skeletonPulse {
+      0% { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .icon-btn {
+      background: transparent;
+      border: 1px solid transparent;
+      width: 36px;
+      height: 36px;
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-muted);
+      cursor: pointer;
+      position: relative;
+      transition: var(--transition-fast);
+    }
+
+    .icon-btn:hover {
+      background: var(--bg-subtle);
+      color: var(--text-main);
+    }
+
+    .notification-badge {
+      position: absolute;
+      top: 6px;
+      right: 6px;
+      width: 8px;
+      height: 8px;
+      background: var(--danger);
+      border-radius: 50%;
+    }
+
+    .user-profile-menu {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 4px 8px;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      font-size: 0.875rem;
+      color: var(--text-main);
+      font-weight: 500;
+    }
+
+    .user-avatar {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: #e0e7ff;
+      color: var(--accent-blue);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      font-size: 0.8125rem;
+    }
+
+    /* Main Container with Sidebar and Content */
+    .app-layout {
+      display: flex;
+      flex: 1;
+      height: calc(100vh - 60px);
+    }
+
+    /* Sidebar */
+    .sidebar {
+      width: 240px;
+      background: var(--bg-surface);
+      border-right: 1px solid var(--border-color);
+      padding: 16px 12px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .sidebar-nav {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 9px 12px;
+      border-radius: var(--radius-sm);
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.875rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: var(--transition-fast);
+    }
+
+    .nav-item:hover {
+      background: var(--bg-subtle);
+      color: var(--text-main);
+    }
+
+    .nav-item.active {
+      background: var(--accent-subtle);
+      color: var(--accent-blue);
+      font-weight: 600;
+    }
+
+    .sidebar-footer {
+      border-top: 1px solid var(--border-color);
+      padding-top: 14px;
+      font-size: 0.75rem;
+      color: var(--text-light);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    /* Main Content Area */
+    .main-viewport {
+      flex: 1;
+      overflow-y: auto;
+      padding: 32px 40px;
+      background: var(--bg-page);
+      position: relative;
+    }
+
+    .page-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 24px;
+    }
+
+    .page-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      color: var(--text-main);
+    }
+
+    .page-subtitle {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    /* Primary & Secondary Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 9px 16px;
+      font-size: 0.875rem;
+      font-weight: 500;
+      border-radius: var(--radius-sm);
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: var(--transition-fast);
+      outline: none;
+      position: relative;
+    }
+
+    .btn-primary {
+      background: var(--accent-blue);
+      color: #ffffff;
+    }
+
+    .btn-primary:hover {
+      background: var(--accent-hover);
+    }
+
+    .btn-secondary {
+      background: var(--bg-surface);
+      border-color: var(--border-color);
+      color: var(--text-main);
+    }
+
+    .btn-secondary:hover {
+      background: var(--bg-subtle);
+    }
+
+    .btn-danger {
+      background: #fef2f2;
+      border-color: #fecaca;
+      color: var(--danger);
+    }
+
+    .btn-danger:hover {
+      background: #fee2e2;
+    }
+
+    /* Obnoxious Overlapping Tooltip */
+    .troll-tooltip-wrap {
+      position: relative;
+      display: inline-block;
+    }
+
+    .troll-tooltip {
+      position: absolute;
+      top: -12px;
+      left: 10px;
+      width: 140px;
+      background: #1e293b;
+      color: #f8fafc;
+      padding: 6px 10px;
+      font-size: 0.72rem;
+      border-radius: 4px;
+      pointer-events: auto;
+      z-index: 500;
+      box-shadow: var(--shadow-md);
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.15s ease;
+    }
+
+    .troll-tooltip-wrap:hover .troll-tooltip {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    /* Stat Cards Grid */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-bottom: 28px;
+    }
+
+    .stat-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 20px;
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition-fast);
+      position: relative;
+    }
+
+    .stat-card:hover {
+      box-shadow: var(--shadow-md);
+    }
+
+    .stat-label {
+      font-size: 0.8125rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .stat-value {
+      font-size: 1.85rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin: 10px 0 6px 0;
+      letter-spacing: -0.03em;
+    }
+
+    .stat-meta {
+      font-size: 0.8125rem;
+      color: var(--success);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-weight: 500;
+    }
+
+    .stat-refresh-badge {
+      font-size: 0.7rem;
+      color: var(--text-light);
+      margin-top: 4px;
+      display: none;
+    }
+
+    /* Card Panels */
+    .card-panel {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 24px;
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 24px;
+    }
+
+    .panel-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 18px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .panel-title {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text-main);
+    }
+
+    /* Reports Progress */
+    .report-progress-wrap {
+      width: 100%;
+      height: 8px;
+      background: var(--bg-subtle);
+      border-radius: 999px;
+      overflow: hidden;
+      margin: 14px 0 10px 0;
+      display: none;
+    }
+
+    .report-progress-bar {
+      width: 0%;
+      height: 100%;
+      background: var(--accent-blue);
+      transition: width 0.3s ease;
+    }
+
+    /* Form Styles */
+    .form-group {
+      margin-bottom: 18px;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 0.8125rem;
+      font-weight: 500;
+      color: var(--text-main);
+      margin-bottom: 6px;
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 9px 12px;
+      font-size: 0.875rem;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      background: var(--bg-surface);
+      color: var(--text-main);
+      outline: none;
+      transition: var(--transition-fast);
+    }
+
+    .form-control:focus {
+      border-color: var(--border-focus);
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.12);
+    }
+
+    .form-error {
+      color: var(--danger);
+      font-size: 0.775rem;
+      margin-top: 5px;
+      display: none;
+    }
+
+    /* Table Styles */
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.875rem;
+    }
+
+    .data-table th {
+      text-align: left;
+      padding: 10px 14px;
+      color: var(--text-muted);
+      font-weight: 500;
+      border-bottom: 1px solid var(--border-color);
+      background: var(--bg-subtle);
+    }
+
+    .data-table td {
+      padding: 14px;
+      border-bottom: 1px solid var(--border-color);
+      color: var(--text-main);
+    }
+
+    /* Toggle Switch */
+    .toggle-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .toggle-label-group {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .toggle-name {
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--text-main);
+    }
+
+    .toggle-desc {
+      font-size: 0.775rem;
+      color: var(--text-muted);
+    }
+
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 44px;
+      height: 24px;
+    }
+
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #cbd5e1;
+      transition: .2s;
+      border-radius: 24px;
+    }
+
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 18px;
+      width: 18px;
+      left: 3px;
+      bottom: 3px;
+      background-color: white;
+      transition: .2s;
+      border-radius: 50%;
+    }
+
+    input:checked + .slider {
+      background-color: var(--accent-blue);
+    }
+
+    input:checked + .slider:before {
+      transform: translateX(20px);
+    }
+
+    /* Polite Toast Notification */
+    .toast-container {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      z-index: 99999;
+    }
+
+    .toast-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      box-shadow: var(--shadow-lg);
+      border-radius: var(--radius-md);
+      padding: 12px 18px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 300px;
+      font-size: 0.85rem;
+      color: var(--text-main);
+      animation: slideInToast 0.25s ease-out;
+    }
+
+    @keyframes slideInToast {
+      from { transform: translateY(20px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    /* Modals */
+    .modal-backdrop {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(15, 23, 42, 0.45);
+      backdrop-filter: blur(3px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 50000;
+    }
+
+    .modal-box {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-lg);
+      width: 100%;
+      max-width: 480px;
+      padding: 24px;
+      animation: modalFadeIn 0.2s ease;
+    }
+
+    @keyframes modalFadeIn {
+      from { transform: scale(0.96); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    .modal-title {
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--text-main);
+      margin-bottom: 6px;
+    }
+
+    .modal-desc {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+      line-height: 1.45;
+    }
+
+    .modal-footer {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    /* Cookie Banner Hell */
+    .cookie-banner {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      width: 400px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-lg);
+      padding: 18px 20px;
+      z-index: 40000;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .cookie-banner-title {
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--text-main);
+    }
+
+    .cookie-banner-text {
+      font-size: 0.775rem;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+
+    .cookie-banner-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* Chat Widget in Corner */
+    .support-chat-launcher {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: var(--accent-blue);
+      color: #ffffff;
+      padding: 10px 16px;
+      border-radius: 999px;
+      box-shadow: var(--shadow-lg);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      cursor: pointer;
+      z-index: 10000;
+      transition: var(--transition-fast);
+    }
+
+    .support-chat-launcher:hover {
+      background: var(--accent-hover);
+    }
+
+    .support-chat-card {
+      position: fixed;
+      bottom: 78px;
+      right: 24px;
+      width: 320px;
+      height: 420px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-lg);
+      display: none;
+      flex-direction: column;
+      z-index: 10000;
+      overflow: hidden;
+    }
+
+    .chat-header {
+      padding: 12px 16px;
+      background: var(--bg-subtle);
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.875rem;
+      font-weight: 600;
+    }
+
+    .chat-body {
+      flex: 1;
+      padding: 16px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      font-size: 0.825rem;
+    }
+
+    .chat-bubble {
+      padding: 8px 12px;
+      border-radius: 8px;
+      max-width: 85%;
+      line-height: 1.4;
+    }
+
+    .chat-bubble-agent {
+      background: var(--bg-subtle);
+      color: var(--text-main);
+      align-self: flex-start;
+    }
+
+    .chat-bubble-user {
+      background: var(--accent-blue);
+      color: #ffffff;
+      align-self: flex-end;
+    }
+
+    .chat-typing-indicator {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      font-style: italic;
+      display: none;
+    }
+
+    .chat-footer {
+      padding: 10px;
+      border-top: 1px solid var(--border-color);
+      display: flex;
+      gap: 8px;
+    }
+
+    .chat-footer input {
+      flex: 1;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      padding: 6px 10px;
+      font-size: 0.8125rem;
+      outline: none;
+    }
+
+    /* LOGIN SCREEN STYLES (Initially Active) */
+    #authOverlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: var(--bg-page);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 90000;
+      padding: 20px;
+    }
+
+    .auth-card {
+      width: 100%;
+      max-width: 420px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-lg);
+      padding: 32px 30px;
+    }
+
+    .auth-header {
+      text-align: center;
+      margin-bottom: 24px;
+    }
+
+    .auth-logo {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      background: linear-gradient(135deg, var(--accent-blue), #60a5fa);
+      border-radius: var(--radius-md);
+      color: #fff;
+      margin-bottom: 12px;
+    }
+
+    .auth-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--text-main);
+      letter-spacing: -0.02em;
+    }
+
+    .auth-subtitle {
+      font-size: 0.825rem;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    .password-rule-badge {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-top: 4px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .two-factor-code-wrap {
+      display: none;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 14px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top 400ms Navigation Progress Bar -->
+  <div id="topLoadingBar" style="position: fixed; top: 0; left: 0; height: 3px; width: 0%; background: #2563eb; z-index: 1000000; transition: width 0.35s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.15s ease; opacity: 0; pointer-events: none;"></div>
+
+  <!-- Demo Mode Banner -->
+  <div id="demoModeBanner">
+    Demo Mode Active — All simulated enterprise restrictions and rate-limits have been lifted.
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- =========================================================
+       1. LOGIN OVERLAY (Appears First)
+       ========================================================= -->
+  <div id="authOverlay">
+    <div class="auth-card">
+      <div class="auth-header">
+        <div class="auth-logo">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"></path>
+          </svg>
+        </div>
+        <div class="auth-title">Sign in to Nimbus Workspace</div>
+        <div class="auth-subtitle">Welcome back. Enter your organization credentials.</div>
+      </div>
+
+      <div id="authAlert" style="display: none; padding: 10px 14px; background: #fef2f2; border: 1px solid #fecaca; border-radius: 6px; font-size: 0.8rem; color: #b91c1c; margin-bottom: 14px;">
+        Session expired, please sign in again.
+      </div>
+
+      <form id="loginForm" onsubmit="return false;">
+        <div class="form-group">
+          <label class="form-label" for="loginEmail">Work Email</label>
+          <input type="email" id="loginEmail" class="form-control" value="sarah.jenkins@acmecorp.com" placeholder="name@company.com" required>
+        </div>
+
+        <div class="form-group" id="loginPasswordGroup">
+          <label class="form-label" for="loginPassword">Password</label>
+          <input type="password" id="loginPassword" class="form-control" placeholder="••••••••" required>
+          <div class="password-rule-badge" id="passwordRule">
+            <span>•</span> <span id="ruleText">Password must be at least 8 characters</span>
+          </div>
+        </div>
+
+        <!-- 2FA Code Input (Shows on 3rd attempt) -->
+        <div class="two-factor-code-wrap" id="twoFactorWrap">
+          <div style="font-size: 0.8rem; color: var(--text-muted); line-height: 1.4;">
+            Security Check: We sent a 6-digit confirmation code to your work email.
+          </div>
+          <div style="display: flex; gap: 8px;">
+            <input type="text" id="twoFactorInput" class="form-control" placeholder="000000" maxlength="6" style="text-align: center; letter-spacing: 4px; font-weight: 600;">
+            <button type="button" class="btn btn-secondary" id="resendCodeBtn" style="white-space: nowrap; font-size: 0.75rem;">Resend</button>
+          </div>
+          <div style="display: flex; justify-content: space-between; font-size: 0.75rem; color: var(--text-light);">
+            <span>Expires in:</span>
+            <span id="codeTimer" style="color: var(--danger); font-weight: 600;">0:03</span>
+          </div>
+        </div>
+
+        <button type="button" class="btn btn-primary" id="signInBtn" style="width: 100%; margin-top: 10px;">
+          <span id="signInBtnText">Sign in</span>
+          <span id="signInSpinner" style="display: none; width: 14px; height: 14px; border: 2px solid #ffffff; border-top-color: transparent; border-radius: 50%; animation: spin 0.6s linear infinite;"></span>
+        </button>
+
+        <div style="text-align: center; margin-top: 16px;">
+          <a href="#" id="demoBypassLink" style="font-size: 0.75rem; color: var(--text-muted); text-decoration: none;">
+            Explore Nimbus Demo Workspace →
+          </a>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- =========================================================
+       TOP NAVBAR
+       ========================================================= -->
+  <header class="navbar">
+    <div class="nav-left">
+      <a href="#" class="brand-logo">
+        <div class="brand-icon">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"></path>
+          </svg>
+        </div>
+        <span>Nimbus</span>
+      </a>
+
+      <div class="workspace-pill">
+        <span>Acme Corp</span>
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="m6 9 6 6 6-6"/>
+        </svg>
+      </div>
+    </div>
+
+    <!-- Search with deceptive suggestions & non-finishing skeleton -->
+    <div class="search-wrapper">
+      <div class="search-input-wrap">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" color="#94a3b8">
+          <circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>
+        </svg>
+        <input type="text" id="globalSearchInput" class="search-input" placeholder="Search workspace, documents, or team members...">
+        <span class="search-kbd">⌘K</span>
+      </div>
+
+      <!-- Suggestions Dropdown -->
+      <div class="search-dropdown" id="searchDropdown">
+        <div class="search-suggestion-item" data-target="billing">
+          <span>📊 Q3 Revenue Analytics</span>
+          <span style="font-size: 0.7rem; color: var(--text-light);">Analytics</span>
+        </div>
+        <div class="search-suggestion-item" data-target="settings">
+          <span>👥 Team Permissions & Roles</span>
+          <span style="font-size: 0.7rem; color: var(--text-light);">Settings</span>
+        </div>
+        <div class="search-suggestion-item" data-target="projects">
+          <span>📁 Project Alpha Migration</span>
+          <span style="font-size: 0.7rem; color: var(--text-light);">Projects</span>
+        </div>
+        <div class="search-suggestion-item" data-target="compliance">
+          <span>🔒 Enterprise Compliance Audit</span>
+          <span style="font-size: 0.7rem; color: var(--text-light);">Security</span>
+        </div>
+      </div>
+
+      <!-- Search Results Skeleton Overlay -->
+      <div class="search-results-overlay" id="searchResultsOverlay">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+          <span style="font-size: 0.78rem; font-weight: 600; color: var(--text-muted);">Showing 0 of 1,284 results</span>
+          <span style="font-size: 0.72rem; color: var(--text-light);" id="searchStatusText">Synchronizing index...</span>
+        </div>
+        <div class="skeleton-loader" style="width: 85%;"></div>
+        <div class="skeleton-loader" style="width: 95%;"></div>
+        <div class="skeleton-loader" style="width: 70%;"></div>
+      </div>
+    </div>
+
+    <!-- Right Controls -->
+    <div class="nav-right">
+      <!-- Visible Sound on/off toggle -->
+      <button class="icon-btn" id="soundToggleBtn" title="Toggle audio feedback">
+        <span id="soundIcon">🔊</span>
+      </button>
+
+      <!-- Notification Bell with sticky badge -->
+      <button class="icon-btn" id="notifBellBtn" title="Notifications">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/>
+        </svg>
+        <span class="notification-badge" id="notifBadge"></span>
+      </button>
+
+      <div class="user-profile-menu">
+        <div class="user-avatar">SJ</div>
+        <span>Sarah Jenkins</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- =========================================================
+       MAIN APP LAYOUT: SIDEBAR + VIEWPORT
+       ========================================================= -->
+  <div class="app-layout">
+    
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <nav class="sidebar-nav" id="sidebarNav">
+        <div class="nav-item active" data-view="dashboard">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="12" rx="1"/><rect width="7" height="5" x="3" y="16" rx="1"/>
+          </svg>
+          <span>Dashboard</span>
+        </div>
+        <div class="nav-item" data-view="projects">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/>
+          </svg>
+          <span>Projects</span>
+        </div>
+        <div class="nav-item" data-view="billing">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/>
+          </svg>
+          <span>Billing</span>
+        </div>
+        <div class="nav-item" data-view="settings">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/>
+          </svg>
+          <span>Settings</span>
+        </div>
+      </nav>
+
+      <div class="sidebar-footer">
+        <span>Nimbus v4.18.2</span>
+        <span style="color: var(--success);">● Active</span>
+      </div>
+    </aside>
+
+    <!-- Main Viewport -->
+    <main class="main-viewport" id="mainViewport">
+
+      <!-- =========================================================
+           VIEW: DASHBOARD
+           ========================================================= -->
+      <div id="viewDashboard" class="view-panel">
+        <div class="page-header">
+          <div>
+            <h1 class="page-title">Workspace Overview</h1>
+            <p class="page-subtitle">Real-time telemetry and operational metrics for Acme Corp.</p>
+          </div>
+          
+          <div class="troll-tooltip-wrap">
+            <button class="btn btn-primary" id="genReportBtn">Generate Report</button>
+            <div class="troll-tooltip">Generating quarterly compliance ledger (v2.8)</div>
+          </div>
+        </div>
+
+        <!-- 3 Stat Cards that reset to 0 on hover -->
+        <div class="stats-grid">
+          <div class="stat-card" id="cardArr">
+            <div class="stat-label">
+              <span>Annual Recurring Revenue</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 12 7-7 7 7"/><path d="M12 19V5"/></svg>
+            </div>
+            <div class="stat-value" id="valArr">$128,490</div>
+            <div class="stat-meta">
+              <span>+14.2%</span>
+              <span style="color: var(--text-light); font-weight: 400;">vs last month</span>
+            </div>
+            <div class="stat-refresh-badge" id="badgeArr">Data refreshed</div>
+          </div>
+
+          <div class="stat-card" id="cardUsers">
+            <div class="stat-label">
+              <span>Active Workspaces</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+            </div>
+            <div class="stat-value" id="valUsers">14,280</div>
+            <div class="stat-meta">
+              <span>+8.4%</span>
+              <span style="color: var(--text-light); font-weight: 400;">this quarter</span>
+            </div>
+            <div class="stat-refresh-badge" id="badgeUsers">Data refreshed</div>
+          </div>
+
+          <div class="stat-card" id="cardUptime">
+            <div class="stat-label">
+              <span>Cluster Availability</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+            </div>
+            <div class="stat-value" id="valUptime">99.98%</div>
+            <div class="stat-meta">
+              <span style="color: var(--success);">Optimal</span>
+              <span style="color: var(--text-light); font-weight: 400;">all regions</span>
+            </div>
+            <div class="stat-refresh-badge" id="badgeUptime">Data refreshed</div>
+          </div>
+        </div>
+
+        <!-- Report Generation Panel -->
+        <div class="card-panel">
+          <div class="panel-header">
+            <div>
+              <div class="panel-title">Q3 Operational Telemetry Ledger</div>
+              <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 2px;">Export complete organization metrics for external stakeholder review.</div>
+            </div>
+            <button class="btn btn-secondary" id="downloadReportBtn" style="display: none;">
+              Download Report
+            </button>
+          </div>
+
+          <div class="report-progress-wrap" id="reportProgressWrap">
+            <div class="report-progress-bar" id="reportProgressBar"></div>
+          </div>
+          <div id="reportStatusMessage" style="font-size: 0.8125rem; color: var(--text-muted);">
+            Ready to compile 48 data endpoints.
+          </div>
+        </div>
+
+        <!-- Recent Projects Table -->
+        <div class="card-panel">
+          <div class="panel-header">
+            <div class="panel-title">Active Projects</div>
+            <button class="btn btn-secondary" id="newProjectTriggerBtn" style="font-size: 0.8rem; padding: 6px 12px;">+ New Project</button>
+          </div>
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Project Name</th>
+                <th>Owner</th>
+                <th>Status</th>
+                <th>Last Modified</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td style="font-weight: 500;">Marketing Q1 - final</td>
+                <td>Sarah Jenkins</td>
+                <td><span style="padding: 2px 8px; background: #ecfdf5; color: #047857; border-radius: 4px; font-size: 0.75rem; font-weight: 500;">Synced</span></td>
+                <td style="color: var(--text-muted);">Just now</td>
+              </tr>
+              <tr>
+                <td style="font-weight: 500;">Infrastructure Migration v2</td>
+                <td>Alex Rivera</td>
+                <td><span style="padding: 2px 8px; background: #eff6ff; color: #1d4ed8; border-radius: 4px; font-size: 0.75rem; font-weight: 500;">In Review</span></td>
+                <td style="color: var(--text-muted);">4 hours ago</td>
+              </tr>
+              <tr>
+                <td style="font-weight: 500;">Security Audit Framework</td>
+                <td>Sarah Jenkins</td>
+                <td><span style="padding: 2px 8px; background: #ecfdf5; color: #047857; border-radius: 4px; font-size: 0.75rem; font-weight: 500;">Synced</span></td>
+                <td style="color: var(--text-muted);">Yesterday</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- =========================================================
+           VIEW: PROJECTS
+           ========================================================= -->
+      <div id="viewProjects" class="view-panel" style="display: none;">
+        <div class="page-header">
+          <div>
+            <h1 class="page-title">Organization Projects</h1>
+            <p class="page-subtitle">Configure deliverables, repositories, and automated build pipelines.</p>
+          </div>
+          <button class="btn btn-primary" id="openProjectModalBtn">Create Project</button>
+        </div>
+
+        <div class="card-panel">
+          <div style="font-size: 0.875rem; color: var(--text-muted); line-height: 1.6;">
+            Viewing active workspace directory for Acme Corp. All changes are automatically synchronized with regional cold storage.
+          </div>
+        </div>
+      </div>
+
+      <!-- =========================================================
+           VIEW: BILLING
+           ========================================================= -->
+      <div id="viewBilling" class="view-panel" style="display: none;">
+        <div class="page-header">
+          <div>
+            <h1 class="page-title">Billing & Subscriptions</h1>
+            <p class="page-subtitle">Manage organization subscription tier, payment methods, and historical invoices.</p>
+          </div>
+          <button class="btn btn-primary" id="billingTopUpgradeBtn">Upgrade Plan</button>
+        </div>
+
+        <!-- Plan Card -->
+        <div class="card-panel">
+          <div class="panel-header">
+            <div>
+              <div class="panel-title">Current Plan: Nimbus Team Workspace</div>
+              <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 2px;">$29 per seat / month • Billed monthly • Next billing cycle Oct 15, 2026</div>
+            </div>
+            <button class="btn btn-primary" id="billingCardUpgradeBtn" style="font-size: 0.825rem;">Upgrade to Enterprise</button>
+          </div>
+          <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 14px;">
+            <div style="padding: 14px; background: var(--bg-subtle); border-radius: 6px;">
+              <div style="font-size: 0.75rem; color: var(--text-muted); font-weight: 500;">Allocated Seats</div>
+              <div style="font-size: 1.35rem; font-weight: 700; color: var(--text-main); margin-top: 4px;">14 / 20</div>
+            </div>
+            <div style="padding: 14px; background: var(--bg-subtle); border-radius: 6px;">
+              <div style="font-size: 0.75rem; color: var(--text-muted); font-weight: 500;">Estimated Monthly Total</div>
+              <div style="font-size: 1.35rem; font-weight: 700; color: var(--text-main); margin-top: 4px;">$406.00</div>
+            </div>
+            <div style="padding: 14px; background: var(--bg-subtle); border-radius: 6px;">
+              <div style="font-size: 0.75rem; color: var(--text-muted); font-weight: 500;">Payment Method on File</div>
+              <div style="font-size: 1.35rem; font-weight: 700; color: var(--text-main); margin-top: 4px;">Visa •••• 4242</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Invoices Table -->
+        <div class="card-panel">
+          <div class="panel-header">
+            <div class="panel-title">Invoice History</div>
+            <button class="btn btn-secondary" style="font-size: 0.8rem; padding: 6px 12px;">Download All (CSV)</button>
+          </div>
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Invoice Reference</th>
+                <th>Billing Period</th>
+                <th>Amount</th>
+                <th>Status</th>
+                <th>Receipt</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td style="font-weight: 500;">#INV-2026-0901</td>
+                <td>Sep 1, 2026</td>
+                <td>$406.00</td>
+                <td><span style="padding: 2px 8px; background: #ecfdf5; color: #047857; border-radius: 4px; font-size: 0.75rem; font-weight: 500;">Paid</span></td>
+                <td><a href="#" style="color: var(--accent-blue); text-decoration: none; font-size: 0.8rem;">PDF Receipt ↗</a></td>
+              </tr>
+              <tr>
+                <td style="font-weight: 500;">#INV-2026-0801</td>
+                <td>Aug 1, 2026</td>
+                <td>$406.00</td>
+                <td><span style="padding: 2px 8px; background: #ecfdf5; color: #047857; border-radius: 4px; font-size: 0.75rem; font-weight: 500;">Paid</span></td>
+                <td><a href="#" style="color: var(--accent-blue); text-decoration: none; font-size: 0.8rem;">PDF Receipt ↗</a></td>
+              </tr>
+              <tr>
+                <td style="font-weight: 500;">#INV-2026-0701</td>
+                <td>Jul 1, 2026</td>
+                <td>$406.00</td>
+                <td><span style="padding: 2px 8px; background: #ecfdf5; color: #047857; border-radius: 4px; font-size: 0.75rem; font-weight: 500;">Paid</span></td>
+                <td><a href="#" style="color: var(--accent-blue); text-decoration: none; font-size: 0.8rem;">PDF Receipt ↗</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- =========================================================
+           VIEW: SETTINGS
+           ========================================================= -->
+      <div id="viewSettings" class="view-panel" style="display: none;">
+        <div class="page-header">
+          <div>
+            <h1 class="page-title">Workspace Settings</h1>
+            <p class="page-subtitle">Manage preferences, notifications, security policies, and workspace lifecycle.</p>
+          </div>
+        </div>
+
+        <div class="card-panel">
+          <div class="panel-title" style="margin-bottom: 14px;">Display & Appearance</div>
+
+          <div class="toggle-wrap">
+            <div class="toggle-label-group">
+              <span class="toggle-name">Dark Mode</span>
+              <span class="toggle-desc">Switch interface theme to high-contrast dark palette.</span>
+            </div>
+            <label class="switch">
+              <input type="checkbox" id="darkModeToggle">
+              <span class="slider"></span>
+            </label>
+          </div>
+
+          <div class="toggle-wrap">
+            <div class="toggle-label-group">
+              <span class="toggle-name">Real-Time Data Streaming</span>
+              <span class="toggle-desc">Maintain persistent WebSocket telemetry link for instantaneous dashboard updates.</span>
+            </div>
+            <label class="switch">
+              <input type="checkbox" id="realtimeToggle" checked>
+              <span class="slider"></span>
+            </label>
+          </div>
+
+          <div class="toggle-wrap">
+            <div class="toggle-label-group">
+              <span class="toggle-name">Automated Security Audits</span>
+              <span class="toggle-desc">Transmit continuous integrity digests to regional compliance coordinators.</span>
+            </div>
+            <label class="switch">
+              <input type="checkbox" id="auditToggle" checked>
+              <span class="slider"></span>
+            </label>
+          </div>
+
+          <div class="toggle-wrap" style="border-bottom: none;">
+            <div class="toggle-label-group">
+              <span class="toggle-name">Desktop Push Notifications</span>
+              <span class="toggle-desc">Receive real-time alerts regarding background workflow progress.</span>
+            </div>
+            <label class="switch">
+              <input type="checkbox" id="pushToggle">
+              <span class="slider"></span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Danger Zone: Delete Account -->
+        <div class="card-panel" style="border-color: #fecaca;">
+          <div class="panel-title" style="color: var(--danger); margin-bottom: 6px;">Danger Zone</div>
+          <p style="font-size: 0.8125rem; color: var(--text-muted); margin-bottom: 14px;">
+            Permanently revoke workspace credentials, delete all cached cloud assets, and terminate subscription.
+          </p>
+          <button class="btn btn-danger" id="openDeleteAccountModalBtn">Delete Workspace Account</button>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- =========================================================
+       CREATE PROJECT MODAL
+       - Name rejects strings until numbers added, then rejects numbers!
+       - Dropdown with 60 nearly identical options
+       - Save disabled until hidden field filled
+       ========================================================= -->
+  <div class="modal-backdrop" id="projectModal">
+    <div class="modal-box">
+      <div class="modal-title">Create New Project</div>
+      <div class="modal-desc">Configure project parameters and assign pipeline dependencies.</div>
+
+      <form id="createProjectForm" onsubmit="return false;">
+        <div class="form-group">
+          <label class="form-label" for="projNameInput">Project Name</label>
+          <input type="text" id="projNameInput" class="form-control" placeholder="e.g. Mobile Application v2">
+          <div class="form-error" id="projNameError">This name is already taken. Please choose a unique name.</div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="projTemplateSelect">Template Category</label>
+          <select id="projTemplateSelect" class="form-control">
+            <!-- 60 nearly identical options populated by JS -->
+          </select>
+        </div>
+
+        <!-- Hidden accordion containing the required field that keeps Save disabled -->
+        <div style="margin-top: 14px;">
+          <div id="advancedTelemetryToggle" style="font-size: 0.775rem; color: var(--text-muted); cursor: pointer; display: flex; align-items: center; gap: 4px;">
+            <span>▶ Advanced Cluster Configuration (Optional)</span>
+          </div>
+          <div id="hiddenTelemetryWrap" style="display: none; margin-top: 10px; padding: 10px; background: var(--bg-subtle); border-radius: 6px;">
+            <label class="form-label" style="font-size: 0.75rem;">Cluster Endpoint GUID (Required)</label>
+            <input type="text" id="hiddenGuidInput" class="form-control" placeholder="urn:nimbus:cluster:00-a000">
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" id="closeProjectModalBtn">Cancel</button>
+          <button type="button" class="btn btn-primary" id="saveProjectBtn" disabled title="Please complete all required fields">
+            Save Project
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- =========================================================
+       NIMBUS PRO PAYWALL MODAL
+       - Prominent Upgrade button, faint small Cancel button
+       ========================================================= -->
+  <div class="modal-backdrop" id="proPaywallModal">
+    <div class="modal-box" style="text-align: center; max-width: 440px;">
+      <div style="width: 48px; height: 48px; background: #eff6ff; color: var(--accent-blue); border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; margin-bottom: 14px;">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 2v20"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+        </svg>
+      </div>
+      <div class="modal-title" style="font-size: 1.25rem;">This feature requires Nimbus Pro</div>
+      <div class="modal-desc">
+        Direct report archival export is reserved for Pro and Enterprise organizations. Upgrade now to unlock automated telemetry compilation.
+      </div>
+      
+      <div style="display: flex; flex-direction: column; gap: 12px; margin-top: 20px;">
+        <button type="button" class="btn btn-primary" id="upgradeProBtn" style="width: 100%; padding: 12px;">
+          Upgrade to Nimbus Pro ($49/mo)
+        </button>
+        <button type="button" id="cancelProBtn" style="background: none; border: none; font-size: 0.72rem; color: var(--text-light); cursor: pointer; text-decoration: underline;">
+          Dismiss and return to dashboard
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================
+       DELETE ACCOUNT CONFIRMATION MODAL
+       - Demands typing DELETE, rejects even when correct
+       ========================================================= -->
+  <div class="modal-backdrop" id="deleteAccountModal">
+    <div class="modal-box">
+      <div class="modal-title" style="color: var(--danger);">Confirm Workspace Deletion</div>
+      <div class="modal-desc">
+        This action is irreversible. All team data, repositories, and invoices will be purged. Type <strong>DELETE</strong> below to confirm.
+      </div>
+
+      <div class="form-group">
+        <input type="text" id="deleteConfirmInput" class="form-control" placeholder="Type DELETE">
+        <div class="form-error" id="deleteConfirmError">Please type it exactly as shown (case-sensitive).</div>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" id="cancelDeleteBtn">Cancel</button>
+        <button type="button" class="btn btn-danger" id="confirmDeleteBtn">Delete Workspace</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================
+       COOKIE PREFERENCES MODAL (30 Toggles all on)
+       ========================================================= -->
+  <div class="modal-backdrop" id="cookieModal">
+    <div class="modal-box" style="max-width: 560px;">
+      <div class="modal-title">Cookie & Tracking Preferences</div>
+      <div class="modal-desc">Configure granularity for organizational telemetry and tracking categories.</div>
+
+      <div id="cookieModalAlert" style="display: none; padding: 8px 12px; background: #fffbeb; border: 1px solid #fde68a; border-radius: 6px; font-size: 0.775rem; color: #92400e; margin-bottom: 12px;">
+        This cookie category is required for basic workspace security and cannot be disabled.
+      </div>
+
+      <div id="cookieModalList" style="max-height: 280px; overflow-y: auto; padding-right: 6px; border: 1px solid var(--border-color); border-radius: 6px; padding: 10px;">
+        <!-- 30 toggles populated by JS -->
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" id="closeCookieModalBtn">Cancel</button>
+        <button type="button" class="btn btn-primary" id="saveCookiePrefsBtn">Save Preferences</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================
+       COOKIE CONSENT BOTTOM BANNER
+       ========================================================= -->
+  <div class="cookie-banner" id="cookieBanner">
+    <div class="cookie-banner-title">We value your privacy</div>
+    <div class="cookie-banner-text">
+      Nimbus uses functional and analytics telemetry to optimize service delivery. Review your preferences below.
+    </div>
+    <div class="cookie-banner-actions">
+      <button class="btn btn-primary" id="acceptAllCookiesBtn" style="font-size: 0.8rem; padding: 6px 12px;">Accept All</button>
+      <button class="btn btn-secondary" id="manageCookiePrefsBtn" style="font-size: 0.8rem; padding: 6px 12px;">Manage preferences</button>
+    </div>
+  </div>
+
+  <!-- =========================================================
+       NIMBUS SUPPORT CHAT WIDGET
+       ========================================================= -->
+  <div class="support-chat-launcher" id="chatLauncher">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/>
+    </svg>
+    <span>Support</span>
+  </div>
+
+  <div class="support-chat-card" id="chatCard">
+    <div class="chat-header">
+      <div style="display: flex; align-items: center; gap: 8px;">
+        <div style="width: 8px; height: 8px; background: var(--success); border-radius: 50%;"></div>
+        <span>Nimbus Assistant</span>
+      </div>
+      <button id="closeChatBtn" style="background: none; border: none; font-size: 1.1rem; color: var(--text-muted); cursor: pointer;">×</button>
+    </div>
+
+    <div class="chat-body" id="chatMessages">
+      <div class="chat-bubble chat-bubble-agent">
+        Hi! How can I help you today?
+      </div>
+      <div class="chat-typing-indicator" id="chatTypingIndicator">
+        Nimbus Support is typing...
+      </div>
+    </div>
+
+    <div class="chat-footer">
+      <input type="text" id="chatInput" placeholder="Type a message...">
+      <button class="btn btn-primary" id="chatSendBtn" style="padding: 6px 12px; font-size: 0.8rem;">Send</button>
+    </div>
+  </div>
+
+  <!-- =========================================================
+       LOGIC & INTERACTION JAVASCRIPT
+       ========================================================= */
+  -->
+  <script>
+    /* =========================================================
+       11. SAFETY ESCAPE HATCH (3 Quick Escape Presses = Demo Mode)
+       ========================================================= */
+    let isDemoMode = false;
+    let escapePressHistory = [];
+
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        const now = Date.now();
+        escapePressHistory.push(now);
+        if (escapePressHistory.length > 3) escapePressHistory.shift();
+
+        if (escapePressHistory.length === 3 && (escapePressHistory[2] - escapePressHistory[0] < 1500)) {
+          toggleDemoMode();
+        }
+      }
+    });
+
+    function toggleDemoMode() {
+      isDemoMode = !isDemoMode;
+      const banner = document.getElementById('demoModeBanner');
+      if (isDemoMode) {
+        banner.style.display = 'block';
+        audioEnabled = false;
+        document.getElementById('authOverlay').style.display = 'none';
+        document.getElementById('saveProjectBtn').removeAttribute('disabled');
+        document.getElementById('cookieBanner').style.display = 'none';
+        showToast("Demo Mode: Restrictions lifted");
+      } else {
+        banner.style.display = 'none';
+        showToast("Standard Mode restored");
+      }
+    }
+
+    /* =========================================================
+       9. SUBTLE SOUNDS & FAHHH SYNTHESIS
+       ========================================================= */
+    let audioEnabled = true;
+    let audioCtx = null;
+
+    function getAudioContext() {
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+      return audioCtx;
+    }
+
+    // Polite corporate click sound (soft high-frequency tap)
+    function playPoliteClick() {
+      if (!audioEnabled || isDemoMode) return;
+      try {
+        const ac = getAudioContext();
+        if (ac.state === 'suspended') ac.resume();
+        const osc = ac.createOscillator();
+        const gain = ac.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(800, ac.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(400, ac.currentTime + 0.03);
+        gain.gain.setValueAtTime(0.04, ac.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, ac.currentTime + 0.03);
+        osc.connect(gain);
+        gain.connect(ac.destination);
+        osc.start();
+        osc.stop(ac.currentTime + 0.03);
+      } catch (err) {}
+    }
+
+    // Corporate subtle noise generator
+    function noise(dur, vol = 0.15) {
+      if (!audioEnabled || isDemoMode) return;
+      try {
+        const ac = getAudioContext();
+        const buf = ac.createBuffer(1, Math.max(1, Math.floor(ac.sampleRate * dur)), ac.sampleRate);
+        const d = buf.getChannelData(0);
+        for (let i = 0; i < d.length; i++) d[i] = Math.random() * 2 - 1;
+        const s = ac.createBufferSource();
+        const g = ac.createGain();
+        s.buffer = buf;
+        g.gain.setValueAtTime(vol, ac.currentTime);
+        g.gain.exponentialRampToValueAtTime(0.001, ac.currentTime + dur);
+        s.connect(g);
+        g.connect(ac.destination);
+        s.start();
+      } catch (e) {}
+    }
+
+    // "fahhh" synth played randomly when the user succeeds at something
+    function playFahhhSynth() {
+      if (!audioEnabled || isDemoMode) return;
+      try {
+        const ac = getAudioContext();
+        if (ac.state === 'suspended') ac.resume();
+        const t = ac.currentTime;
+        noise(0.12, 0.15);
+        const o = ac.createOscillator();
+        o.type = 'sawtooth';
+        o.frequency.setValueAtTime(220, t + 0.1);
+        o.frequency.linearRampToValueAtTime(330, t + 0.3);
+        o.frequency.exponentialRampToValueAtTime(140, t + 1.2);
+        const f1 = ac.createBiquadFilter();
+        f1.type = 'bandpass'; f1.frequency.value = 800; f1.Q.value = 5;
+        const f2 = ac.createBiquadFilter();
+        f2.type = 'bandpass'; f2.frequency.value = 1200; f2.Q.value = 5;
+        const g = ac.createGain();
+        g.gain.setValueAtTime(0.001, t + 0.1);
+        g.gain.linearRampToValueAtTime(0.5, t + 0.2);
+        g.gain.exponentialRampToValueAtTime(0.001, t + 1.3);
+        o.connect(f1).connect(g);
+        o.connect(f2).connect(g);
+        g.connect(ac.destination);
+        o.start(t + 0.1);
+        o.stop(t + 1.3);
+      } catch (e) {}
+    }
+
+    document.getElementById('soundToggleBtn').addEventListener('click', () => {
+      audioEnabled = !audioEnabled;
+      document.getElementById('soundIcon').textContent = audioEnabled ? '🔊' : '🔇';
+      showToast(audioEnabled ? "Audio feedback enabled" : "Audio feedback disabled");
+    });
+
+    // Global polite click listener
+    document.addEventListener('click', (e) => {
+      if (e.target.closest('button, a, input, select, .nav-item, .search-suggestion-item')) {
+        playPoliteClick();
+      }
+    });
+
+    /* =========================================================
+       5. NOTIFICATIONS & TOASTS (Steals input focus)
+       ========================================================= */
+    const toastContainer = document.getElementById('toastContainer');
+    const politeToasts = [
+      "Saved",
+      "New comment from Alex on Marketing Q1",
+      "Autosave failed, retrying...",
+      "Workspace state synchronized",
+      "Background digest generated"
+    ];
+
+    function showToast(msg) {
+      if (isDemoMode) return;
+      const text = msg || politeToasts[Math.floor(Math.random() * politeToasts.length)];
+      const toast = document.createElement('div');
+      toast.className = 'toast-card';
+      toast.innerHTML = `
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2">
+          <circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/>
+        </svg>
+        <span>${text}</span>
+      `;
+      toastContainer.appendChild(toast);
+
+      // Polite focus stealing: unfocus any active typing input!
+      if (document.activeElement && (document.activeElement.tagName === 'INPUT' || document.activeElement.tagName === 'TEXTAREA')) {
+        document.activeElement.blur();
+      }
+
+      setTimeout(() => {
+        toast.style.opacity = '0';
+        toast.style.transition = 'opacity 0.4s ease';
+        setTimeout(() => toast.remove(), 400);
+      }, 3600);
+    }
+
+    // Periodic toast that steals focus
+    setInterval(() => {
+      if (!isDemoMode && document.getElementById('authOverlay').style.display === 'none') {
+        showToast();
+      }
+    }, 18000);
+
+    // Notification bell button: NEVER clears badge!
+    document.getElementById('notifBellBtn').addEventListener('click', () => {
+      showToast("Marking all notifications as read...");
+      // Badge stays red!
+      document.getElementById('notifBadge').style.display = 'block';
+    });
+
+    /* =========================================================
+       1. LOGIN FLOW
+       - Polished spinner -> "Session expired, please sign in again" (clears password only)
+       - 3rd attempt: 2FA code with expired countdown (0:03... 0:02... expired)
+       - Live password rule contradiction (>=8 chars -> "no more than 7")
+       ========================================================= */
+    let loginAttempts = 0;
+    const loginPassword = document.getElementById('loginPassword');
+    const passwordRule = document.getElementById('passwordRule');
+    const ruleText = document.getElementById('ruleText');
+    const authAlert = document.getElementById('authAlert');
+    const signInBtn = document.getElementById('signInBtn');
+    const signInBtnText = document.getElementById('signInBtnText');
+    const signInSpinner = document.getElementById('signInSpinner');
+    const twoFactorWrap = document.getElementById('twoFactorWrap');
+    const codeTimer = document.getElementById('codeTimer');
+
+    // Quiet password contradiction rule
+    loginPassword.addEventListener('input', () => {
+      const len = loginPassword.value.length;
+      if (len >= 8) {
+        ruleText.textContent = "Password must not exceed 7 characters on standard tier";
+        passwordRule.style.color = "var(--danger)";
+      } else {
+        ruleText.textContent = "Password must be at least 8 characters";
+        passwordRule.style.color = "var(--text-muted)";
+      }
+    });
+
+    signInBtn.addEventListener('click', () => {
+      loginAttempts++;
+      signInBtnText.textContent = "Verifying your identity...";
+      signInSpinner.style.display = "inline-block";
+
+      setTimeout(() => {
+        signInSpinner.style.display = "none";
+        signInBtnText.textContent = "Sign in";
+
+        if (loginAttempts >= 3 && twoFactorWrap.style.display !== 'flex') {
+          // 3rd attempt: Show Two-Factor verification code trap
+          authAlert.style.display = 'none';
+          twoFactorWrap.style.display = 'flex';
+          startTwoFactorCountdown();
+        } else if (twoFactorWrap.style.display === 'flex') {
+          // Attempting to submit expired 2FA code
+          authAlert.textContent = "The verification code has expired. Please request a new code.";
+          authAlert.style.display = 'block';
+          playPoliteClick();
+        } else {
+          // Standard login attempt: "Session expired" & clear password only
+          authAlert.textContent = "Session expired, please sign in again.";
+          authAlert.style.display = 'block';
+          loginPassword.value = '';
+          loginPassword.focus();
+        }
+      }, 1500);
+    });
+
+    function startTwoFactorCountdown() {
+      let seconds = 3;
+      codeTimer.textContent = `0:0${seconds}`;
+      codeTimer.style.color = "var(--danger)";
+
+      const countdown = setInterval(() => {
+        seconds--;
+        if (seconds > 0) {
+          codeTimer.textContent = `0:0${seconds}`;
+        } else {
+          clearInterval(countdown);
+          codeTimer.textContent = "Code expired, resend";
+        }
+      }, 1000);
+    }
+
+    document.getElementById('resendCodeBtn').addEventListener('click', () => {
+      showToast("Security digest resent");
+      startTwoFactorCountdown();
+    });
+
+    // Bypass link for users to enter the workspace
+    document.getElementById('demoBypassLink').addEventListener('click', (e) => {
+      e.preventDefault();
+      document.getElementById('authOverlay').style.display = 'none';
+      showToast("Signed in as Sarah Jenkins (Acme Corp)");
+      playFahhhSynth(); // Subtle fahhh on unexpected success!
+    });
+
+    /* =========================================================
+       2. SEARCH SYSTEM
+       - Enter shows "0 of 1,284 results" + infinite skeleton
+       - Clicking suggestion loads 4s, opens totally wrong page
+       ========================================================= */
+    const searchInput = document.getElementById('globalSearchInput');
+    const searchDropdown = document.getElementById('searchDropdown');
+    const searchResultsOverlay = document.getElementById('searchResultsOverlay');
+
+    searchInput.addEventListener('focus', () => {
+      searchResultsOverlay.style.display = 'none';
+      searchDropdown.style.display = 'flex';
+    });
+
+    searchInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        searchDropdown.style.display = 'none';
+        searchResultsOverlay.style.display = 'block';
+      }
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('.search-wrapper')) {
+        searchDropdown.style.display = 'none';
+        searchResultsOverlay.style.display = 'none';
+      }
+    });
+
+    // Suggestion items load for 4s, then navigate to WRONG VIEW
+    document.querySelectorAll('.search-suggestion-item').forEach((item) => {
+      item.addEventListener('click', () => {
+        searchDropdown.style.display = 'none';
+        showToast("Loading requested resource...");
+        
+        setTimeout(() => {
+          // Clicked Analytics or Projects? Navigates to Settings or Reports instead!
+          switchView('settings');
+          showToast("Opened: Workspace Telemetry Preferences");
+        }, 4000);
+      });
+    });
+
+    /* =========================================================
+       8. MICRO ANNOYANCES:
+       - Random 20px scroll up
+       - Sidebar highlights previous item
+       - Double-click required every other time
+       ========================================================= */
+    // Random 20px scroll up
+    setInterval(() => {
+      if (!isDemoMode && window.scrollY > 40) {
+        window.scrollBy({ top: -20, behavior: 'smooth' });
+      }
+    }, 15000);
+
+    // Top 400ms loading bar on navigation
+    function triggerTopLoadingBar(onComplete) {
+      const bar = document.getElementById('topLoadingBar');
+      if (!bar) {
+        if (onComplete) onComplete();
+        return;
+      }
+      bar.style.opacity = '1';
+      bar.style.width = '0%';
+      setTimeout(() => { bar.style.width = '70%'; }, 20);
+      setTimeout(() => {
+        bar.style.width = '100%';
+        if (onComplete) onComplete();
+        setTimeout(() => {
+          bar.style.opacity = '0';
+          setTimeout(() => { bar.style.width = '0%'; }, 200);
+        }, 120);
+      }, 350);
+    }
+
+    // Wrong navigation map:
+    // - Click "Projects" -> opens the Settings page.
+    // - Click "Settings" -> opens the Billing page.
+    // - Click "Billing" -> opens the Dashboard.
+    // - Click "Dashboard" -> opens Projects.
+    const wrongNavigationMap = {
+      'projects': 'settings',
+      'settings': 'billing',
+      'billing': 'dashboard',
+      'dashboard': 'projects'
+    };
+
+    const pageTitles = {
+      'dashboard': 'Workspace Overview — Nimbus Workspace',
+      'projects': 'Projects — Nimbus Workspace',
+      'billing': 'Billing & Subscriptions — Nimbus Workspace',
+      'settings': 'Settings — Nimbus Workspace'
+    };
+
+    function switchView(viewName) {
+      document.querySelectorAll('.view-panel').forEach(p => p.style.display = 'none');
+      if (viewName === 'projects') {
+        const el = document.getElementById('viewProjects');
+        if (el) el.style.display = 'block';
+      } else if (viewName === 'billing') {
+        const el = document.getElementById('viewBilling');
+        if (el) el.style.display = 'block';
+      } else if (viewName === 'settings') {
+        const el = document.getElementById('viewSettings');
+        if (el) el.style.display = 'block';
+      } else {
+        const el = document.getElementById('viewDashboard');
+        if (el) el.style.display = 'block';
+      }
+
+      if (pageTitles[viewName]) {
+        document.title = pageTitles[viewName];
+      }
+    }
+
+    // Sidebar: clicking highlights PREVIOUS item in standard mode, correct item in Demo Mode
+    const navItems = Array.from(document.querySelectorAll('.sidebar-nav .nav-item'));
+    navItems.forEach((item, index) => {
+      item.addEventListener('click', () => {
+        const clickedView = item.getAttribute('data-view');
+        
+        let actualViewToOpen = clickedView;
+        if (!isDemoMode && wrongNavigationMap[clickedView]) {
+          actualViewToOpen = wrongNavigationMap[clickedView];
+        }
+
+        // Highlight previous item in standard mode, or clicked item in Demo Mode
+        navItems.forEach(n => n.classList.remove('active'));
+        if (!isDemoMode) {
+          const previousIndex = index === 0 ? navItems.length - 1 : index - 1;
+          navItems[previousIndex].classList.add('active');
+        } else {
+          item.classList.add('active');
+        }
+
+        // Short 400ms loading bar at the top of the page on every navigation
+        triggerTopLoadingBar(() => {
+          switchView(actualViewToOpen);
+        });
+      });
+    });
+
+    // Every other button click is ignored (requires double click)
+    let globalClickCount = 0;
+    document.querySelectorAll('button').forEach((btn) => {
+      btn.addEventListener('click', (e) => {
+        if (isDemoMode) return;
+        globalClickCount++;
+        if (globalClickCount % 2 !== 0 && !btn.id.includes('soundToggle') && !btn.id.includes('demo')) {
+          e.stopImmediatePropagation();
+          // Subtly absorb the click
+        }
+      }, true);
+    });
+
+    /* =========================================================
+       3. DASHBOARD CARDS:
+       - Hover resets stats to 0, then updates with slight variation
+       - Report progress runs to 100%, Download asks for Pro upgrade
+       ========================================================= */
+    const statCards = [
+      { id: 'cardArr', valId: 'valArr', badgeId: 'badgeArr', base: 128490, prefix: '$' },
+      { id: 'cardUsers', valId: 'valUsers', badgeId: 'badgeUsers', base: 14280, prefix: '' },
+      { id: 'cardUptime', valId: 'valUptime', badgeId: 'badgeUptime', base: 99.98, prefix: '', suffix: '%' }
+    ];
+
+    statCards.forEach((c) => {
+      const cardEl = document.getElementById(c.id);
+      const valEl = document.getElementById(c.valId);
+      const badgeEl = document.getElementById(c.badgeId);
+
+      cardEl.addEventListener('mouseenter', () => {
+        if (isDemoMode) return;
+        valEl.textContent = "0";
+        badgeEl.style.display = "none";
+
+        setTimeout(() => {
+          const delta = (Math.random() - 0.5) * 10;
+          const newVal = (c.base + delta).toFixed(c.suffix ? 2 : 0);
+          valEl.textContent = (c.prefix || '') + Number(newVal).toLocaleString() + (c.suffix || '');
+          badgeEl.style.display = "block";
+        }, 900);
+      });
+    });
+
+    // Report generation progress
+    const genReportBtn = document.getElementById('genReportBtn');
+    const reportProgressWrap = document.getElementById('reportProgressWrap');
+    const reportProgressBar = document.getElementById('reportProgressBar');
+    const reportStatusMessage = document.getElementById('reportStatusMessage');
+    const downloadReportBtn = document.getElementById('downloadReportBtn');
+
+    genReportBtn.addEventListener('click', () => {
+      reportProgressWrap.style.display = 'block';
+      reportProgressBar.style.width = '0%';
+      reportStatusMessage.textContent = "Compiling telemetry ledger...";
+
+      let prog = 0;
+      const interval = setInterval(() => {
+        prog += 20;
+        reportProgressBar.style.width = prog + '%';
+        if (prog >= 100) {
+          clearInterval(interval);
+          reportStatusMessage.textContent = "Report ready: Ledger_Q3_Enterprise.pdf (14.2 MB)";
+          downloadReportBtn.style.display = 'inline-flex';
+          playFahhhSynth(); // Success triggers fahhh sound!
+        }
+      }, 350);
+    });
+
+    // Download button: says "Preparing..." for 8s, then shows Paywall Modal
+    downloadReportBtn.addEventListener('click', () => {
+      downloadReportBtn.textContent = "Preparing...";
+      downloadReportBtn.setAttribute('disabled', 'true');
+
+      setTimeout(() => {
+        downloadReportBtn.textContent = "Download Report";
+        downloadReportBtn.removeAttribute('disabled');
+        document.getElementById('proPaywallModal').style.display = 'flex';
+      }, 8000);
+    });
+
+    document.getElementById('cancelProBtn').addEventListener('click', () => {
+      document.getElementById('proPaywallModal').style.display = 'none';
+      showToast("Download cancelled by user policy");
+    });
+
+    document.getElementById('upgradeProBtn').addEventListener('click', () => {
+      showToast("Redirecting to Stripe Billing Portal...");
+    });
+
+    /* =========================================================
+       4. FORMS: "CREATE PROJECT"
+       - 60 nearly identical options
+       - Name rejects until numbers added, then rejects numbers!
+       - Save disabled until hidden field in collapsed accordion filled
+       ========================================================= */
+    const projTemplateSelect = document.getElementById('projTemplateSelect');
+    const templateVariants = [
+      "Marketing Q1", "Marketing Q1 (copy)", "Marketing Q1 - final", "Marketing Q1 - final v2",
+      "Marketing Q1 (new)", "Marketing Q1 - updated", "Marketing Q1 - real final", "Marketing Q1 - revised",
+      "Marketing Q1 - approved", "Marketing Q1 (final review)", "Marketing Q1 - draft 4", "Marketing Q1 - signed"
+    ];
+
+    for (let i = 0; i < 60; i++) {
+      const opt = document.createElement('option');
+      const base = templateVariants[i % templateVariants.length];
+      opt.textContent = `${base} [Rev.${Math.floor(i / 10) + 1}.${i % 10}]`;
+      opt.value = opt.textContent;
+      projTemplateSelect.appendChild(opt);
+    }
+
+    const openProjModal = () => document.getElementById('projectModal').style.display = 'flex';
+    document.getElementById('openProjectModalBtn').addEventListener('click', openProjModal);
+    document.getElementById('newProjectTriggerBtn').addEventListener('click', openProjModal);
+    document.getElementById('closeProjectModalBtn').addEventListener('click', () => {
+      document.getElementById('projectModal').style.display = 'none';
+    });
+
+    // Project Name validation quiet contradiction
+    const projNameInput = document.getElementById('projNameInput');
+    const projNameError = document.getElementById('projNameError');
+    const saveProjectBtn = document.getElementById('saveProjectBtn');
+    const hiddenGuidInput = document.getElementById('hiddenGuidInput');
+
+    projNameInput.addEventListener('input', () => {
+      const val = projNameInput.value.trim();
+      const hasNumber = /\d/.test(val);
+
+      if (!hasNumber) {
+        projNameError.textContent = "This name is already taken. Please choose a unique name.";
+        projNameError.style.display = "block";
+      } else {
+        projNameError.textContent = "Project names cannot contain numeric characters.";
+        projNameError.style.display = "block";
+      }
+    });
+
+    // Hidden required field inside accordion
+    document.getElementById('advancedTelemetryToggle').addEventListener('click', () => {
+      const wrap = document.getElementById('hiddenTelemetryWrap');
+      wrap.style.display = wrap.style.display === 'none' ? 'block' : 'none';
+    });
+
+    hiddenGuidInput.addEventListener('input', () => {
+      if (hiddenGuidInput.value.length > 5) {
+        saveProjectBtn.removeAttribute('disabled');
+      } else {
+        saveProjectBtn.setAttribute('disabled', 'true');
+      }
+    });
+
+    saveProjectBtn.addEventListener('click', () => {
+      showToast("Saving project configuration...");
+      setTimeout(() => {
+        document.getElementById('projectModal').style.display = 'none';
+        showToast("Project state synchronized");
+        playFahhhSynth();
+      }, 1000);
+    });
+
+    /* =========================================================
+       6. SETTINGS PAGE:
+       - Toggles flip back 1 second later with toast
+       - Delete account demands "DELETE" and rejects it
+       - Dark mode turns dark 2s then reverts
+       ========================================================= */
+    const toggles = ['realtimeToggle', 'auditToggle', 'pushToggle'];
+    toggles.forEach(id => {
+      const el = document.getElementById(id);
+      el.addEventListener('change', () => {
+        if (isDemoMode) return;
+        setTimeout(() => {
+          el.checked = !el.checked;
+          showToast("Preference updated");
+        }, 1000);
+      });
+    });
+
+    // Dark mode toggle: dark for 2s then reverts
+    document.getElementById('darkModeToggle').addEventListener('change', (e) => {
+      if (isDemoMode) return;
+      document.body.classList.add('dark-mode-temp');
+      showToast("Display preference applied");
+
+      setTimeout(() => {
+        document.body.classList.remove('dark-mode-temp');
+        e.target.checked = false;
+        showToast("Display preference synced with workspace policy");
+      }, 2000);
+    });
+
+    // Delete account modal
+    document.getElementById('openDeleteAccountModalBtn').addEventListener('click', () => {
+      document.getElementById('deleteAccountModal').style.display = 'flex';
+    });
+    document.getElementById('cancelDeleteBtn').addEventListener('click', () => {
+      document.getElementById('deleteAccountModal').style.display = 'none';
+    });
+
+    document.getElementById('confirmDeleteBtn').addEventListener('click', () => {
+      const input = document.getElementById('deleteConfirmInput');
+      const error = document.getElementById('deleteConfirmError');
+      // Rejects even if typed DELETE!
+      error.style.display = 'block';
+      input.focus();
+    });
+
+    /* =========================================================
+       7. COOKIE AND CONSENT:
+       - 30-toggle panel where every toggle is ON
+       - Turning any off shows required error
+       - Saving reopens banner after 20s
+       ========================================================= */
+    const cookieModalList = document.getElementById('cookieModalList');
+    const cookiePurposes = [
+      "Strictly Necessary Workspace Telemetry", "Cross-Region Token Propagation", "Session Integrity Beacons",
+      "Network Latency Optimization Probes", "Audit Trail Preservation Vectors", "Identity Sync Anchors"
+    ];
+
+    for (let i = 1; i <= 30; i++) {
+      const row = document.createElement('div');
+      row.className = 'toggle-wrap';
+      row.style.padding = '8px 0';
+      row.innerHTML = `
+        <div class="toggle-label-group">
+          <span class="toggle-name" style="font-size: 0.8rem;">Category #${i}: ${cookiePurposes[i % cookiePurposes.length]}</span>
+          <span class="toggle-desc" style="font-size: 0.7rem;">Retains compliance status.</span>
+        </div>
+        <label class="switch" style="transform: scale(0.8);">
+          <input type="checkbox" checked class="cookie-sub-toggle">
+          <span class="slider"></span>
+        </label>
+      `;
+      cookieModalList.appendChild(row);
+    }
+
+    document.querySelectorAll('.cookie-sub-toggle').forEach(chk => {
+      chk.addEventListener('change', () => {
+        chk.checked = true; // Flips right back
+        document.getElementById('cookieModalAlert').style.display = 'block';
+      });
+    });
+
+    document.getElementById('manageCookiePrefsBtn').addEventListener('click', () => {
+      document.getElementById('cookieModal').style.display = 'flex';
+    });
+    document.getElementById('closeCookieModalBtn').addEventListener('click', () => {
+      document.getElementById('cookieModal').style.display = 'none';
+    });
+    document.getElementById('saveCookiePrefsBtn').addEventListener('click', () => {
+      document.getElementById('cookieModal').style.display = 'none';
+      document.getElementById('cookieBanner').style.display = 'none';
+      showToast("Privacy parameters updated");
+      // Reopens after 20s!
+      setTimeout(() => {
+        if (!isDemoMode) document.getElementById('cookieBanner').style.display = 'flex';
+      }, 20000);
+    });
+
+    document.getElementById('acceptAllCookiesBtn').addEventListener('click', () => {
+      document.getElementById('cookieBanner').style.display = 'none';
+      showToast("All telemetry categories consented");
+      setTimeout(() => {
+        if (!isDemoMode) document.getElementById('cookieBanner').style.display = 'flex';
+      }, 20000);
+    });
+
+    /* =========================================================
+       8. CHAT WIDGET ("Have you tried refreshing?")
+       ========================================================= */
+    const chatLauncher = document.getElementById('chatLauncher');
+    const chatCard = document.getElementById('chatCard');
+    const closeChatBtn = document.getElementById('closeChatBtn');
+    const chatInput = document.getElementById('chatInput');
+    const chatSendBtn = document.getElementById('chatSendBtn');
+    const chatMessages = document.getElementById('chatMessages');
+    const chatTypingIndicator = document.getElementById('chatTypingIndicator');
+
+    chatLauncher.addEventListener('click', () => {
+      chatCard.style.display = 'flex';
+      chatLauncher.style.display = 'none';
+    });
+
+    closeChatBtn.addEventListener('click', () => {
+      chatCard.style.display = 'none';
+      chatLauncher.style.display = 'flex';
+    });
+
+    function sendChatMessage() {
+      const text = chatInput.value.trim();
+      if (!text) return;
+      chatInput.value = '';
+
+      const userBubble = document.createElement('div');
+      userBubble.className = 'chat-bubble chat-bubble-user';
+      userBubble.textContent = text;
+      chatMessages.appendChild(userBubble);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+
+      // 5-second typing indicator
+      chatTypingIndicator.style.display = 'block';
+      chatMessages.appendChild(chatTypingIndicator);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+
+      setTimeout(() => {
+        chatTypingIndicator.style.display = 'none';
+        const responses = [
+          "Have you tried refreshing your browser window?",
+          "Could you please rephrase your inquiry for our team?",
+          "We're currently working on this. Thanks for your patience.",
+          "This action can't be completed right now. Please try again later."
+        ];
+        const agentBubble = document.createElement('div');
+        agentBubble.className = 'chat-bubble chat-bubble-agent';
+        agentBubble.textContent = responses[Math.floor(Math.random() * responses.length)];
+        chatMessages.appendChild(agentBubble);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+      }, 5000);
+    }
+
+    chatSendBtn.addEventListener('click', sendChatMessage);
+    chatInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') sendChatMessage();
+    });
+  </script>
+</body>
+</html>
